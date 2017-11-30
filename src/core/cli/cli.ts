@@ -17,7 +17,7 @@ export function CLI(configuration: CLIConfiguration): any {
                 const execFunc = this.resolveExecuteFunction(args);
                 execFunc(args);
             }
-
+            // TODO: move this logic in the OrbitalFactory
             private resolveExecuteFunction(args: any[]) {
                 let execute;
                 if (this.commands && this.commands.length > 0) {
