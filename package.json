@@ -1,0 +1,46 @@
+{
+  "name": "orbital",
+  "version": "1.0.0",
+  "description": "Typescript CLI framework for node",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc",
+    "test": "mocha --require ts-node/register ./src/**/*.spec.ts",
+    "cover": "nyc yarn test"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "reflect-metadata": "^0.1.10"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.6",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.53",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "ts-mockito": "^2.2.7",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1"
+  },
+  "keywords": [
+    "cli",
+    "typescript"
+  ],
+  "author": "MrMan",
+  "license": "MIT",
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "src/**/test/",
+      "**/*.js"
+    ],
+    "reporter": [
+      "text",
+      "text-summary"
+    ]
+  }
+}

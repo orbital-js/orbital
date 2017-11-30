@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run mocha",
+            "type": "node",
+            "request": "launch",
+            "internalConsoleOptions": "openOnSessionStart",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "--no-timeouts",
+                "--require",
+                "ts-node/register",
+                "${workspaceRoot}/src/**/*.spec.ts"
+            ],
+            "cwd": "${workspaceRoot}",
+            "protocol": "inspector",
+        }
+    ],
+    "compounds": []
+}
