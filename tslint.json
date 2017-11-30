@@ -11,7 +11,8 @@
             "options": "single"
         },
         "object-literal-sort-keys": false,
-        "no-console": false
+        "no-console": false,
+        "arrow-parens": false
     },
     "rulesDirectory": []
 }
