@@ -13,6 +13,7 @@ export function Command(configuration: CommandConfiguration): any {
         }
         return class extends constructor {
             name = configuration.name;
+            aliases = configuration.aliases;
         };
     };
 }
