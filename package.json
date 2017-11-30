@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc",
     "test": "mocha --require ts-node/register ./src/**/*.spec.ts",
-    "cover": "nyc yarn test"
+    "cover": "nyc npm run test"
   },
   "dependencies": {
     "chalk": "^2.3.0",
