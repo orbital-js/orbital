@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import { CLI } from '../core/cli/cli';
 import { Command } from '../core/command/command';
 import { Executable } from '../core/executable';
-import { DecoratedCommand } from '../core/command/decorated-command-type';
 
 // region CLI test classes
 @CLI({

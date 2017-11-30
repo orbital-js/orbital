@@ -1,7 +1,7 @@
-import { DecoratedCommand } from '../command/decorated-command-type';
+import { DecoratedCommand } from '../command/decorated-command.type';
 
 /**
- * Configuration declaration for the CLI
+ * Configuration for the `CLI` decorator.
  */
 export interface CLIConfiguration {
     name?: string;

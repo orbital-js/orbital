@@ -1,4 +1,4 @@
-import { CLIConfiguration } from './cli-metadata.interface';
+import { CLIConfiguration } from './cli-configuration.interface';
 import { Executable } from '../executable';
 
 /**
