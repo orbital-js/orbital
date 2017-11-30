@@ -9,6 +9,7 @@
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "args": [
                 "--no-timeouts",
+                "--colors",
                 "--require",
                 "ts-node/register",
                 "${workspaceRoot}/src/**/*.spec.ts"
