@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "experimentalDecorators": true
+    },
+    "include": [
+        "**/*.spec.ts"
+    ]
+}
