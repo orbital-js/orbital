@@ -1,7 +1,12 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "experimentalDecorators": true
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "@orbital/*": ["../../*"]
+        }
     },
     "include": [
         "**/*.spec.ts"

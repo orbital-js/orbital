@@ -1,13 +1,11 @@
-import { expect } from 'chai';
-
-import { OrbitalFactory } from '../orbital-factory';
-
-import { Constructor } from '../util/constructor';
-import { Executable } from '../interfaces/executable';
+import { OrbitalFactory, Executable } from '@orbital/core';
+import { Constructor } from '@orbital/core/util/constructor';
 
 import { TestCLI } from './shared/cli/test-cli';
 import { EmptyCLI } from './shared/cli/empty-cli';
 import { TestCliWithCommand } from './shared/cli/test-cli-with-command';
+
+import { expect } from 'chai';
 
 describe('Orbital factory', () => {
     const factory = OrbitalFactory.bootstrap(TestCLI);

@@ -1,5 +1,5 @@
-import { Executable } from '../../../interfaces/executable';
-import { CLI } from '../../../cli/cli';
+import { Executable } from '@orbital/core';
+import { CLI } from '@orbital/core';
 
 @CLI({
     name: 'test-cli',

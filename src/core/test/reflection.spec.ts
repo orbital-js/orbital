@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { applyClassMetadata, getClassMetadata } from '../reflection/class';
+import { applyClassMetadata, getClassMetadata } from '@orbital/core/reflection/class';
 
 class TestMetadata { }
 

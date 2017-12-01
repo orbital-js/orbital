@@ -1,6 +1,7 @@
-import { expect } from 'chai';
-import { getClassMetadata } from '../reflection/class';
+import { getClassMetadata } from '@orbital/core/reflection/class';
 import { TestCLI } from './shared/cli/test-cli';
+
+import { expect } from 'chai';
 
 describe('CLI decorator', () => {
     it('Should metadata attached', () => {

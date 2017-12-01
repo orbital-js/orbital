@@ -7,11 +7,15 @@
             "request": "launch",
             "internalConsoleOptions": "openOnSessionStart",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "env": {
+                "TS_NODE_PROJECT": "src/core/test"
+            },
             "args": [
-                "--no-timeouts",
                 "--colors",
-                "--require",
+                "-r",
                 "ts-node/register",
+                "-r",
+                "tsconfig-paths/register",
                 "${workspaceRoot}/src/**/*.spec.ts"
             ],
             "cwd": "${workspaceRoot}",

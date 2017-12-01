@@ -1,4 +1,4 @@
-import { CLI } from '../../../cli/cli';
+import { CLI } from '@orbital/core';
 
 @CLI({})
 export class EmptyCLI {
