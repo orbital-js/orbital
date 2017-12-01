@@ -34,6 +34,13 @@ describe('OrbitalFactory', () => {
                 .to.throw('Leaf command');
         });
 
+        it('Should throw if command does not exist', () => {
+            const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
+            expect(() => testCliWithCommand.execute(['test-cli-with-command', 'non-exist-command']))
+                .to.throw(
+                'This command is not executable. Please add an `execute` method to your non-exist-command function.');
+        });
+
         it('Should throw show help if no commands nor execute method are provided', () => {
             const emptyCli = OrbitalFactory.bootstrap(EmptyCLI as Constructor<Executable>);
             expect(() => emptyCli.execute())
@@ -47,7 +54,6 @@ describe('OrbitalFactory', () => {
             factory = OrbitalFactory
                 .inject(['hello', new K()])
                 .bootstrap(CLIWithArguments);
-            console.log(factory);
         });
 
 

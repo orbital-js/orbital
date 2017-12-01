@@ -1,6 +1,6 @@
 import * as isConstructor from 'is-constructor';
 
-import { isFunction, log } from 'util';
+import { isFunction, isUndefined } from 'util';
 
 import { CLIConfiguration } from './cli/cli-configuration.interface';
 import { Constructor } from './util/constructor';
@@ -45,12 +45,13 @@ export class OrbitalFactoryStatic {
 
         if (arrayIsPopulated(commands) && arrayIsPopulated(args)) {
             const command = commands.find(com => com.name === args[1]);
-            if (command) {
+            if (command && command.execute) {
                 executed = true;
                 command.execute();
             } else {
-                throw new Error('This command is not executable. Please add an `execute` method to your '
-                    + command.constructor.name + ' class.');
+                throw new Error('This command is not executable. Please add an `execute` method to your ' +
+                    ((!isUndefined(command) && !isConstructor(command)) ?
+                        command.constructor.name + ' class.' : args[1] + ' function.'));
             }
         }
 
