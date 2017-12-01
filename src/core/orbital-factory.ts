@@ -60,7 +60,6 @@ export class OrbitalFactoryStatic {
 
         if (!execute) {
             const cliInstance = new this.CLIClass();
-            console.log(args);
             if (args[0] === name && cliInstance.execute) {
                 execute = cliInstance.execute;
             } else {
