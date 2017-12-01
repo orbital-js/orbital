@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/orbital-js/orbital.svg?branch=old-version)](https://travis-ci.org/orbital-js/orbital)
+[![Build Status](https://travis-ci.org/orbital-js/orbital.svg?branch=master)](https://travis-ci.org/orbital-js/orbital)
 [![Coverage Status](https://coveralls.io/repos/github/orbital-js/orbital/badge.svg?branch=master)](https://coveralls.io/github/orbital-js/orbital?branch=master)
 [![Join the chat at https://gitter.im/orbital-js/orbital](https://badges.gitter.im/orbital-js/orbital.svg)](https://gitter.im/orbital-js/orbital?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 # Orbital
