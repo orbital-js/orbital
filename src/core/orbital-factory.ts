@@ -20,13 +20,7 @@ export class OrbitalFactoryStatic {
      * @param depedencies the dependencies your CLI function may need to construct
      */
     inject(dependencies: any[]): this {
-        for (const dependency of dependencies) {
-            if (isConstructor(dependency)) {
-                this.$inject.push(new dependency());
-            } else {
-                this.$inject.push(dependency);
-            }
-        }
+        this.$inject = dependencies;
         return this;
     }
 
@@ -46,14 +40,14 @@ export class OrbitalFactoryStatic {
      */
     // execute(...args: any[]): void;
     execute(args: any[] = []): void {
+        let executed = false;
         const { name = '', commands = [], version = '' } = this.metadata;
-        let executed: boolean = false;
 
         if (arrayIsPopulated(commands) && arrayIsPopulated(args)) {
             const command = commands.find(com => com.name === args[1]);
             if (command) {
-                command.execute();
                 executed = true;
+                command.execute();
             } else {
                 throw new Error('This command is not executable. Please add an `execute` method to your '
                     + command.constructor.name + ' class.');
@@ -63,8 +57,8 @@ export class OrbitalFactoryStatic {
         if (!executed) {
             const cliInstance = new this.CLIClass(...this.$inject);
             if (args[0] === name && isFunction(cliInstance.execute)) {
-                cliInstance.execute();
                 executed = true;
+                cliInstance.execute();
             } else {
                 throw new Error('Show help');
             }

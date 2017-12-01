@@ -1,30 +1,16 @@
-<<<<<<< HEAD
-
 import { OrbitalFactory, OrbitalFactoryStatic } from '../orbital-factory';
 
 import { CLIWithArguments } from './shared/cli/cli-with-arguments';
 import { Constructor } from '@orbital/core/util/constructor';
 import { EmptyCLI } from './shared/cli/empty-cli';
 import { Executable } from '@orbital/core';
+import { K } from 'shared/class';
 import { TestCLI } from './shared/cli/test-cli';
 import { TestCliWithCommand } from './shared/cli/test-cli-with-command';
 import { expect } from 'chai';
 
 describe('OrbitalFactory', () => {
 
-=======
-import { OrbitalFactory, Executable } from '@orbital/core';
-import { Constructor } from '@orbital/core/util/constructor';
-
-import { TestCLI } from './shared/cli/test-cli';
-import { EmptyCLI } from './shared/cli/empty-cli';
-import { TestCliWithCommand } from './shared/cli/test-cli-with-command';
-
-import { expect } from 'chai';
-
-describe('Orbital factory', () => {
-    const factory = OrbitalFactory.bootstrap(TestCLI);
->>>>>>> 16c85c24cc231d2ec3930d8b517c394156d7bc71
     // it('Should return an exectuable', () => {
     //     expect(factory)
     //         .to.haveOwnProperty('execute');
@@ -59,7 +45,7 @@ describe('Orbital factory', () => {
 
         beforeEach(() => {
             factory = OrbitalFactory
-                .inject(['hello'])
+                .inject(['hello', new K()])
                 .bootstrap(CLIWithArguments);
             console.log(factory);
         });

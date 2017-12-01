@@ -1,4 +1,5 @@
 import { CLI } from '@orbital/core';
+import { K } from '../class';
 
 @CLI({
     name: 'test-cli'
@@ -6,9 +7,10 @@ import { CLI } from '@orbital/core';
 export class CLIWithArguments {
     constructor(
         public thing: string,
+        public k: K,
     ) { }
 
     execute() {
-throw new Error(this.thing);
+        this.k.throw(this.thing);
     }
 }
