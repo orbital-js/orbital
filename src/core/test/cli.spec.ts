@@ -4,7 +4,6 @@ import { Constructor } from '../util/constructor';
 import { Executable } from '../interfaces/executable';
 import { OrbitalFactory } from '../orbital-factory';
 import { expect } from 'chai';
-import { shouldHaveKey } from './util/reflection.spec';
 
 // region CLI test classes
 @CLI({
