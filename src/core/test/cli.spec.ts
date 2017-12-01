@@ -1,7 +1,10 @@
 import { CLI } from '../cli/cli';
 import { Command } from '../command/command';
+import { Constructor } from '../util/constructor';
 import { Executable } from '../interfaces/executable';
+import { OrbitalFactory } from '../orbital-factory';
 import { expect } from 'chai';
+import { shouldHaveKey } from './util/reflection.spec';
 
 // region CLI test classes
 @CLI({
@@ -37,13 +40,15 @@ class TestCliWithCommand implements Executable {
 // endregion CLI test classes
 
 describe('CLI decorator', () => {
-    const testCli = new TestCLI();
+    const factory = OrbitalFactory.bootstrap(TestCLI);
     describe('Configuration', () => {
-        it('Should have a metadata attached', () => {
-            expect(testCli)
+        it('Should have a name property in metadata', () => {
+            expect((factory as any).metadata)
                 .to.haveOwnProperty('name')
                 .and.equal('test-cli');
-            expect(testCli)
+        });
+        it('should have a version property in metadata', () => {
+            expect((factory as any).metadata)
                 .to.haveOwnProperty('version')
                 .and.equal('1.0.0');
         });
@@ -51,18 +56,18 @@ describe('CLI decorator', () => {
 
     describe('Command resolution', () => {
         it('Should resolve master command if no commands are defined', () => {
-            expect(() => testCli.execute('test-cli'))
+            expect(() => factory.execute(['test-cli']))
                 .to.throw('Master command');
         });
 
         it('Should resolve leaf command with corresponding name', () => {
-            const testCliWithCommand = new TestCliWithCommand();
-            expect(() => testCliWithCommand.execute('test-cli-with-command', 'test-command'))
+            const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
+            expect(() => testCliWithCommand.execute(['test-cli-with-command', 'test-command']))
                 .to.throw('Leaf command');
         });
 
         it('Should throw show help if no commands nor execute method are provided', () => {
-            const emptyCli = new EmptyCLI() as Executable;
+            const emptyCli = OrbitalFactory.bootstrap(EmptyCLI as Constructor<Executable>);
             expect(() => emptyCli.execute())
                 .to.throw('Show help');
         });
