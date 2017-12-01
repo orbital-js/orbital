@@ -1,19 +1,13 @@
 import { CommandConfiguration } from './command-configuration.interface';
-import { Executable } from '../interfaces/executable';
+import { applyClassMetadata } from '../reflection/class';
 
 /**
  * Decorator function defining a CLI command
  *
  * @param configuration Declaration of a command
  */
-export function Command(configuration: CommandConfiguration): any {
+export function Command(configuration: CommandConfiguration): ClassDecorator {
     return (constructor: any) => {
-        if (constructor.prototype.execute === undefined) {
-            throw new Error('Command decorator requires class to implement Executable');
-        }
-        return class extends constructor {
-            name = configuration.name;
-            aliases = configuration.aliases;
-        };
+        return applyClassMetadata(constructor, configuration);
     };
 }

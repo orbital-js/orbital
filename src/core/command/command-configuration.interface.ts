@@ -6,5 +6,5 @@ import { Executable } from '../interfaces/executable';
 export class CommandConfiguration {
     name?: string;
     aliases?: string[];
-    commands?: any[];
+    subCommands?: any[];
 }

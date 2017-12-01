@@ -1,10 +1,14 @@
-import { Command } from '../command/command';
-import { Executable } from '../interfaces/executable';
+import { getClassMetadata } from '@orbital/core/reflection/class';
+import { Executable, Command } from '@orbital/core';
+
 import { expect } from 'chai';
 
 @Command({
     name: 'test-command',
-    aliases: ['test', 't' ],
+    aliases: ['test', 't'],
+    subCommands: [
+        'fake',
+    ],
 })
 class TestCommand implements Executable {
     execute(...args: any[]): void {
@@ -14,19 +18,17 @@ class TestCommand implements Executable {
 
 describe('Command decorator', () => {
     it('Should have metadata attached', () => {
-        const testCommand = new TestCommand();
-        expect(testCommand)
+        const metadata = getClassMetadata(TestCommand);
+        expect(metadata)
             .to.haveOwnProperty('name')
             .and.to.equal('test-command');
-        expect(testCommand)
+
+        expect(metadata)
             .to.haveOwnProperty('aliases')
             .and.deep.equal(['test', 't']);
-    });
 
-    it('Should throw an error if the decorated class doesn\'t implement Executable', () => {
-        // tslint:disable-next-line:max-classes-per-file
-        expect(() => { @Command({}) class NotExecutable { } })
-            .to.throw('Command decorator requires class to implement Executable');
+        expect(metadata)
+            .to.haveOwnProperty('subCommands')
+            .and.deep.equal(['fake']);
     });
-
 });
