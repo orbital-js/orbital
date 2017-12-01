@@ -4,3 +4,5 @@ dist/
 # Coverage and tests
 .nyc_output/
 coverage/
+
+.idea
