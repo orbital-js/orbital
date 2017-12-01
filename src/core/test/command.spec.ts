@@ -1,6 +1,6 @@
+import { Command } from '../command/command';
+import { Executable } from '../interfaces/executable';
 import { expect } from 'chai';
-import { Command } from '../core/command/command';
-import { Executable } from '../core/executable';
 
 @Command({
     name: 'test-command',

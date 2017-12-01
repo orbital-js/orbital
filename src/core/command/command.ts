@@ -1,5 +1,5 @@
 import { CommandConfiguration } from './command-configuration.interface';
-import { Executable } from '../executable';
+import { Executable } from '../interfaces/executable';
 
 /**
  * Decorator function defining a CLI command

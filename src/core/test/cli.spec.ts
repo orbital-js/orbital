@@ -1,8 +1,7 @@
+import { CLI } from '../cli/cli';
+import { Command } from '../command/command';
+import { Executable } from '../interfaces/executable';
 import { expect } from 'chai';
-
-import { CLI } from '../core/cli/cli';
-import { Command } from '../core/command/command';
-import { Executable } from '../core/executable';
 
 // region CLI test classes
 @CLI({
@@ -27,7 +26,8 @@ class TestCLI implements Executable {
             throw new Error('Leaf command');
         },
     }],
-}) class TestCliWithCommand implements Executable {
+})
+class TestCliWithCommand implements Executable {
     execute(...args: any[]) { throw new Error('Method not implemented'); }
 }
 

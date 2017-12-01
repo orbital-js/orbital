@@ -1,11 +1,10 @@
-import { Executable } from '../executable';
-import { DecoratedCommand } from './decorated-command.type';
+import { Executable } from '../interfaces/executable';
 
 /**
  * Configuration for the `Command` decorator.
  */
-export interface CommandConfiguration {
+export class CommandConfiguration {
     name?: string;
     aliases?: string[];
-    commands?: DecoratedCommand[];
+    commands?: any[];
 }
