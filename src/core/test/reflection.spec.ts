@@ -1,9 +1,7 @@
 import { expect } from 'chai';
 import { applyClassMetadata, getClassMetadata } from '../reflection/class';
 
-class TestMetadata {
-
-}
+class TestMetadata { }
 
 describe('Reflection functions', () => {
     before(() => {
