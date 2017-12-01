@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { getClassMetadata } from '@orbital/core/reflection/class';
 
 describe('CLI decorator', () => {
-    it('Should metadata attached', () => {
+    it('Should attatch metadata', () => {
         const metadata = getClassMetadata(TestCLI);
         expect(metadata)
             .to.haveOwnProperty('name')
@@ -12,5 +12,4 @@ describe('CLI decorator', () => {
             .to.haveOwnProperty('version')
             .and.equal('1.0.0');
     });
-
 });

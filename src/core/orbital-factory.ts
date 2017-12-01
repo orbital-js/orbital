@@ -62,7 +62,6 @@ export class OrbitalFactoryStatic {
 
         if (!executed) {
             const cliInstance = new this.CLIClass(...this.$inject);
-            console.log(isFunction(cliInstance.execute));
             if (args[0] === name && isFunction(cliInstance.execute)) {
                 cliInstance.execute();
                 executed = true;
