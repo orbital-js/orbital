@@ -2,6 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "moduleResolution": "node",
+        "target": "es2017",
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
