@@ -1,17 +1,20 @@
 import { OrbitalFactory, OrbitalFactoryStatic } from '../orbital-factory';
 
+import { BadCLINoClass } from './shared/cli/bad-cli-no-class';
 import { CLIWithArguments } from './shared/cli/cli-with-arguments';
 import { Constructor } from '@orbital/core/util/constructor';
 import { EmptyCLI } from './shared/cli/empty-cli';
 import { Executable } from '@orbital/core';
 import { K } from 'shared/class';
 import { TestCLI } from './shared/cli/test-cli';
+import { TestCliWithBadCommand } from './shared/cli/bad-cli-command';
 import { TestCliWithCommand } from './shared/cli/test-cli-with-command';
+import { commandNotExecutable } from '../util/errors';
 import { expect } from 'chai';
 
 describe('OrbitalFactory', () => {
 
-    // it('Should return an exectuable', () => {
+    // it('should return an exectuable', () => {
     //     expect(factory)
     //         .to.haveOwnProperty('execute');
     // });
@@ -23,28 +26,39 @@ describe('OrbitalFactory', () => {
             factory = OrbitalFactory.bootstrap(TestCLI);
         });
 
-        it('Should resolve master command if no commands are defined', () => {
+        it('should resolve master command if no commands are defined', () => {
             expect(() => factory.execute(['test-cli']))
                 .to.throw('Master command');
         });
 
-        it('Should resolve leaf command with corresponding name', () => {
+        it('should resolve leaf command with corresponding name', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
             expect(() => testCliWithCommand.execute(['test-cli-with-command', 'test-command']))
                 .to.throw('Leaf command');
         });
 
-        it('Should throw if command does not exist', () => {
+        it('should throw if command does not exist', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
             expect(() => testCliWithCommand.execute(['test-cli-with-command', 'non-exist-command']))
-                .to.throw(
-                'This command is not executable. Please add an `execute` method to your non-exist-command function.');
+                .to.throw('Show help');
         });
 
-        it('Should throw show help if no commands nor execute method are provided', () => {
-            const emptyCli = OrbitalFactory.bootstrap(EmptyCLI as Constructor<Executable>);
+        it('should throw if command does not have an execute function', () => {
+            const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithBadCommand);
+            expect(() => testCliWithCommand.execute(['test-cli-with-command', 'empty-command']))
+                .to.throw(commandNotExecutable('EmptyCommand'));
+        });
+
+        it('should throw show help if no commands nor execute method are provided', () => {
+            const emptyCli = OrbitalFactory.bootstrap(EmptyCLI);
             expect(() => emptyCli.execute())
                 .to.throw('Show help');
+        });
+
+        it('should throw if a command is not a function', () => {
+            const emptyCli = OrbitalFactory.bootstrap(BadCLINoClass);
+            expect(() => emptyCli.execute(['test-cli-with-command', 'empty-command']))
+                .to.throw(commandNotExecutable());
         });
     });
     describe('Dependency Injection', () => {
@@ -52,7 +66,7 @@ describe('OrbitalFactory', () => {
 
         beforeEach(() => {
             factory = OrbitalFactory
-                .inject(['hello', new K()])
+                .inject(['hello'])
                 .bootstrap(CLIWithArguments);
         });
 

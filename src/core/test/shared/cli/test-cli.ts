@@ -1,11 +1,9 @@
-import { Executable } from '@orbital/core';
 import { CLI } from '@orbital/core';
+import { Executable } from '@orbital/core';
 
 @CLI({
     name: 'test-cli',
-    commands: [
-
-    ],
+    commands: [],
     version: '1.0.0',
 })
 export class TestCLI implements Executable {

@@ -7,10 +7,9 @@ import { K } from '../class';
 export class CLIWithArguments {
     constructor(
         public thing: string,
-        public k: K,
     ) { }
 
     execute() {
-        this.k.throw(this.thing);
+        throw new Error(this.thing);
     }
 }

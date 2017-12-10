@@ -7,8 +7,9 @@ import { TestCommand } from '../commands/command';
     name: 'test-cli-with-command',
     commands: [
         TestCommand,
+        EmptyCommand,
     ],
 })
-export class TestCliWithCommand implements Executable {
+export class TestCliWithBadCommand implements Executable {
     execute(...args: any[]) { throw new Error('Method not implemented'); }
 }
