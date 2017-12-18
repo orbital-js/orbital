@@ -11,10 +11,14 @@
   "dependencies": {
     "chalk": "^2.3.0",
     "is-constructor": "^1.0.2",
+    "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
     "reflect-metadata": "^0.1.10"
   },
   "devDependencies": {
     "@types/chai": "^4.0.6",
+    "@types/lodash": "^4.14.91",
+    "@types/minimist": "^1.2.0",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.53",
     "chai": "^4.1.2",

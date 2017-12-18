@@ -3,6 +3,9 @@ import * as isConstructor from 'is-constructor';
 import { isFunction, isUndefined } from 'util';
 
 import { CLIConfiguration } from './cli/cli-configuration.interface';
+import { CommandExecutor } from './command-executor';
+import { CommandMapper } from './command-mapper';
+import { CommandParser } from './command-parser';
 import { Constructor } from './util/constructor';
 import { Executable } from './interfaces/executable';
 import { arrayIsPopulated } from './util/array';
@@ -14,7 +17,7 @@ export class OrbitalFactoryStatic {
     private metadata: CLIConfiguration;
     private CLIClass: Constructor<Executable>;
     private $inject: any[] = [];
-    private commandResponse: any;
+    private commandParser = new CommandParser();
 
     /**
      * If your CLI class has constructor arguments, they can be
@@ -44,23 +47,27 @@ export class OrbitalFactoryStatic {
     execute(args: any[] = []): void {
         let executed = false;
         const { name = '', commands = [], version = '' } = this.metadata;
-
+        const mapper = new CommandMapper();
+        const parser = new CommandParser();
+        const executor = new CommandExecutor();
         if (arrayIsPopulated(commands) && arrayIsPopulated(args)) {
-            const mappedCommands = commands.map(mapCommands);
-            const command = mappedCommands.find(com => com.name === args[1]);
-            if (command && command.execute) {
-                executed = true;
-                this.commandResponse = command.execute();
-            } else {
-                throw new Error('Show help');
+            const commandMap = mapper.map(commands);
+            const input = parser.parse(args);
+            if (commandMap) {
+                const run = executor.execute(input, commandMap);
+                if (run) {
+                    executed = true;
+                } else {
+                    throw new Error('Show help');
+                }
             }
         }
 
         if (!executed) {
             const cliInstance = new this.CLIClass(...this.$inject);
-            if (args[0] === name && isFunction(cliInstance.execute)) {
+            if (isFunction(cliInstance.execute)) {
                 executed = true;
-                this.commandResponse = cliInstance.execute();
+                cliInstance.execute();
             } else {
                 throw new Error('Show help');
             }
@@ -68,24 +75,4 @@ export class OrbitalFactoryStatic {
     }
 }
 
-function mapCommands(C: Constructor<Executable>) {
-    console.log(C.name);
-    let commandInstance: Executable;
-    if (isFunction(C)) {
-        commandInstance = new C();
-    }
-    if (commandInstance && commandInstance instanceof Executable && isFunction(commandInstance.execute)) {
-        const meta = getClassMetadata(C);
-        return {
-            ...meta,
-            execute: commandInstance.execute,
-            className: C.name,
-        };
-    } else {
-
-        throw new Error(commandNotExecutable(C.name));
-    }
-}
-
 export const OrbitalFactory = new OrbitalFactoryStatic();
-

@@ -46,7 +46,7 @@ describe('OrbitalFactory', () => {
         it('should throw if command does not have an execute function', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithBadCommand);
             expect(() => testCliWithCommand.execute(['test-cli-with-command', 'empty-command']))
-                .to.throw(commandNotExecutable('EmptyCommand'));
+                .to.throw('Command empty-command does not have a method called execute, so it can not be run.');
         });
 
         it('should throw show help if no commands nor execute method are provided', () => {

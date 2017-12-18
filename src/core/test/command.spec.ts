@@ -1,12 +1,12 @@
-import { getClassMetadata } from '@orbital/core/reflection/class';
-import { Executable, Command } from '@orbital/core';
+import { Command, Executable } from '@orbital/core';
 
 import { expect } from 'chai';
+import { getClassMetadata } from '@orbital/core/reflection/class';
 
 @Command({
     name: 'test-command',
-    aliases: ['test', 't'],
-    subCommands: [
+    alias: ['test', 't'],
+    subcommands: [
         'fake',
     ],
 })
@@ -24,11 +24,11 @@ describe('Command decorator', () => {
             .and.to.equal('test-command');
 
         expect(metadata)
-            .to.haveOwnProperty('aliases')
+            .to.haveOwnProperty('alias')
             .and.deep.equal(['test', 't']);
 
         expect(metadata)
-            .to.haveOwnProperty('subCommands')
+            .to.haveOwnProperty('subcommands')
             .and.deep.equal(['fake']);
     });
 });

@@ -1,6 +1,6 @@
 import { CLIConfiguration } from './cli-configuration.interface';
 import { Constructor } from '../util/constructor';
-import { applyClassMetadata } from '../reflection/class';
+import { setClassMetadata } from '../reflection/class';
 
 /**
  * Decorator function defining the CLI entry point
@@ -9,6 +9,6 @@ import { applyClassMetadata } from '../reflection/class';
  */
 export function CLI(configuration: CLIConfiguration): ClassDecorator {
     return (constructor) => {
-        return applyClassMetadata(constructor, configuration);
+        return setClassMetadata(constructor, configuration);
     };
 }

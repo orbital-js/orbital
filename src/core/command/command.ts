@@ -1,5 +1,6 @@
+import { getClassMetadata, setClassMetadata } from '../reflection/class';
+
 import { CommandConfiguration } from './command-configuration.interface';
-import { applyClassMetadata } from '../reflection/class';
 
 /**
  * Decorator function defining a CLI command
@@ -8,6 +9,10 @@ import { applyClassMetadata } from '../reflection/class';
  */
 export function Command(configuration: CommandConfiguration): ClassDecorator {
     return (constructor: any) => {
-        return applyClassMetadata(constructor, configuration);
+        const metadata = getClassMetadata(constructor) || {};
+        metadata.name = configuration.name;
+        metadata.alias = configuration.alias;
+        metadata.subcommands = configuration.subcommands;
+        return setClassMetadata(constructor, metadata);
     };
 }
