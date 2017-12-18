@@ -9,7 +9,12 @@ import { Param } from '../../../param/param';
 export class CommandWithParam implements Executable {
     execute(
         @Param() name: string,
+        @Param() age?: number,
     ) {
-        throw new Error(name);
+        if (age) {
+            throw new Error(age.toString());
+        } else {
+            throw new Error(name);
+        }
     }
 }

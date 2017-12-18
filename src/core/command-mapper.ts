@@ -25,18 +25,16 @@ export class CommandMapper {
                 commandMetadata.alias = [commandMetadata.alias];
             }
 
-            if (this.isThereACommandNamed(commandMetadata.name) ||
-                this.isThereACommandWithAlias(commandMetadata.alias, commandMetadata.name)) {
-                return;
-            }
+            this.isThereACommandNamed(commandMetadata.name);
+            this.isThereACommandWithAlias(commandMetadata.alias, commandMetadata.name);
 
             if (commandInstance.execute) {
 
-                for (const opt in commandMetadata.options) {
-                    if (typeof commandMetadata.options[opt] === 'string') {
-                        commandMetadata.options[opt] = [commandMetadata.options[opt]];
-                    }
-                }
+                // for (const opt in commandInstance.constructor.options) {
+                //     if (typeof commandInstance.constructor.options[opt] === 'string') {
+                //         commandMetadata.options[opt] = [commandMetadata.options[opt]];
+                //     }
+                // }
 
                 this.commands.push({
                     instance: commandInstance,
@@ -59,8 +57,9 @@ export class CommandMapper {
     private isThereACommandNamed(name: string) {
         const commands = this.commands.filter(c => c.name === name);
         if (commands.length > 0) {
-            this.logger.error('Two commands named ' + name + ' exist. Please rename or remove one of them.');
-            return true;
+            const err = 'Two commands named "' + name + '" exist. Please rename or remove one of them.';
+            this.logger.error(err);
+            throw new Error(err);
         } else {
             return false;
         }
@@ -76,8 +75,9 @@ export class CommandMapper {
                 const aliases = aliasMap[c];
                 for (const a of alias) {
                     if (aliases.indexOf(a) > -1) {
-                        this.logger.error('Multiple commands with alias ' + a + ' exist: ' + name + ' and ' + c);
-                        return true;
+                        const error = 'Multiple commands with alias "' + a + '" exist: "' + name + '" and "' + c + '".';
+                        this.logger.error(error);
+                        throw new Error(error);
                     }
                 }
             }

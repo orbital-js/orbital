@@ -12,8 +12,21 @@ export class CommandWithOption implements Executable {
         alias: 'n',
     }) name: string;
 
+    @Option({
+        alias: ['o', 'opt'],
+        name: 'override',
+    }) option: string;
+
+    @Option() emptyOption: string;
+
     execute() {
-        throw new Error(this.name);
+        if (this.emptyOption) {
+            throw new Error(this.emptyOption);
+        } else if (this.option) {
+            throw new Error(this.option);
+        } else {
+            throw new Error(this.name);
+        }
     }
 
 }

@@ -11,16 +11,14 @@ import { ParamMetadata } from './param-metadata';
  */
 export function Param(param: ParamMetadata = {}): ParameterDecorator {
     return (target: any, propertyKey: string | symbol, index: number) => {
+
         // we can only apply parameters to `execute`
         if (propertyKey !== 'execute') {
             const logger = new Logger('Orbital');
-            logger.error('@Param() can only decorate arguments to execute(), but it was found decorating '
-                + (propertyKey as string) + '().');
+            const err = '@Param() can only decorate arguments to execute(), but it was found decorating '
+                + (propertyKey as string) + '().';
+            logger.error(err);
             return;
-        }
-
-        if (!target.constructor.metadata) {
-            target.constructor.metadata = {};
         }
 
         let params = target.constructor.params;

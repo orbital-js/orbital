@@ -43,7 +43,8 @@
     ],
     "exclude": [
       "src/**/test/",
-      "**/*.js"
+      "**/*.js",
+      "src/core/util/logger.ts"
     ],
     "reporter": [
       "text",

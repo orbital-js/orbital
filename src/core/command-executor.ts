@@ -38,7 +38,7 @@ export class CommandExecutor {
         const option = executor.options[opt];
         if (input.options[option.name]) {
             executor.instance[option.propertyKey] = input.options[option.name];
-        } else {
+        } else if (option.alias && option.alias.length) {
             for (const a of option.alias) {
                 if (input.options[a]) {
                     executor.instance[option.propertyKey] = input.options[a];
