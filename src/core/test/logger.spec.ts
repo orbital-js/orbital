@@ -8,13 +8,13 @@ describe('Logging', () => {
     describe('Format', () => {
         it('should format properly', () => {
             expect(format('info message', Level.INFO, 'Orbital'))
-                .to.equal(chalk.blue('[Orbital]') + ' ' + chalk.greenBright('[info]') + ' ' + 'info message');
+                .to.equal(chalk.blue('[Orbital]') + ' ' + chalk.green('[info]') + ' ' + 'info message');
 
             expect(format('warn message', Level.WARN, 'Orbital'))
-                .to.equal(chalk.blue('[Orbital]') + ' ' + chalk.yellowBright('[warn]') + ' ' + 'warn message');
+                .to.equal(chalk.blue('[Orbital]') + ' ' + chalk.yellow('[warn]') + ' ' + 'warn message');
 
             expect(format('error message', Level.ERROR, 'Orbital'))
-                .to.equal(chalk.blue('[Orbital]') + ' ' + chalk.redBright('[error]') + ' ' + 'error message');
+                .to.equal(chalk.blue('[Orbital]') + ' ' + chalk.red('[error]') + ' ' + 'error message');
         });
     });
 

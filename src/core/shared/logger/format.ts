@@ -7,13 +7,13 @@ export function format(message: string, level: Level, prefix: string): string {
 
     switch (level) {
         case Level.INFO:
-            levelLabel = chalk.greenBright('[' + level + ']');
+            levelLabel = chalk.green('[' + level + ']');
             break;
         case Level.WARN:
-            levelLabel = chalk.yellowBright('[' + level + ']');
+            levelLabel = chalk.yellow('[' + level + ']');
             break;
         case Level.ERROR:
-            levelLabel = chalk.redBright('[' + level + ']');
+            levelLabel = chalk.red('[' + level + ']');
             break;
     }
 
