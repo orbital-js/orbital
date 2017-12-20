@@ -1,3 +1,4 @@
+// OMG: SAY NO TO LODASH !!!!!
 import * as _ from 'lodash';
 import * as minimist from 'minimist';
 
@@ -7,7 +8,9 @@ export class CommandParser {
     private args: minimist.ParsedArgs;
 
     parse(args: string[]): ParsedArgs {
+        // TODO: Wrap external APIs
         this.args = minimist(args);
+        // TODO: Remove side effect to make readability easier
         return {
             name: this.parseCommandName(),
             options: this.parseOptions(),

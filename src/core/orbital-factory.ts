@@ -1,8 +1,6 @@
-import * as isConstructor from 'is-constructor';
-
 import { isFunction, isUndefined } from 'util';
 
-import { CLIConfiguration } from './cli/cli-configuration.interface';
+import { CLIMetadata } from './cli/cli-metadata';
 import { CommandExecutor } from './command-executor';
 import { CommandMapper } from './command-mapper';
 import { CommandParser } from './command-parser';
@@ -14,8 +12,9 @@ import { getClassMetadata } from './reflection/class';
 
 export class OrbitalFactoryStatic {
 
-    private metadata: CLIConfiguration;
+    private metadata: CLIMetadata;
     private CLIClass: Constructor<Executable>;
+    // WTF: Why `$` prefix please ?
     private $inject: any[] = [];
     private commandParser = new CommandParser();
 
@@ -24,6 +23,7 @@ export class OrbitalFactoryStatic {
      * injected with this function. Classes will automatically be instantiated.
      * @param depedencies the dependencies your CLI function may need to construct
      */
+    // WTF: What is even that inject thingy ?!!
     inject(dependencies: any[]): this {
         this.$inject = dependencies;
         return this;
@@ -45,11 +45,14 @@ export class OrbitalFactoryStatic {
      */
     // execute(...args: any[]): void;
     execute(args: any[] = []): void {
+        // OMG: You is too long mate
         let executed = false;
         const { name = '', commands = [], version = '' } = this.metadata;
         const mapper = new CommandMapper();
         const parser = new CommandParser();
         const executor = new CommandExecutor();
+
+        // WTF: You make no sense mate...
         if (arrayIsPopulated(commands) && arrayIsPopulated(args)) {
             const commandMap = mapper.map(commands);
             const input = parser.parse(args);
@@ -64,6 +67,7 @@ export class OrbitalFactoryStatic {
         }
 
         if (!executed) {
+            // OMG: No to the new this.CLIClass !!
             const cliInstance = new this.CLIClass(...this.$inject);
             if (isFunction(cliInstance.execute)) {
                 executed = true;

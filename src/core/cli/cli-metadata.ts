@@ -1,7 +1,7 @@
 /**
  * Configuration for the `CLI` decorator.
  */
-export class CLIConfiguration {
+export class CLIMetadata {
     name?: string;
     version?: string;
     commands?: any[];

@@ -1,6 +1,7 @@
 import { CommandMap } from './interfaces/command-map';
 import { ParsedArgs } from './interfaces/parsed-args';
 
+// WTF: what is this even ?
 export class CommandExecutor {
 
     execute(input: ParsedArgs, map: CommandMap[]) {

@@ -1,5 +1,6 @@
 import { Executable } from './executable';
 
+// WTF: Is a command map ?
 export interface CommandMap {
     instance: Executable;
     name: string;

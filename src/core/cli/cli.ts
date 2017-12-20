@@ -1,4 +1,4 @@
-import { CLIConfiguration } from './cli-configuration.interface';
+import { CLIMetadata } from './cli-metadata';
 import { Constructor } from '../util/constructor';
 import { setClassMetadata } from '../reflection/class';
 
@@ -7,7 +7,7 @@ import { setClassMetadata } from '../reflection/class';
  *
  * @param configuration Declaration of the CLI
  */
-export function CLI(configuration: CLIConfiguration): ClassDecorator {
+export function CLI(configuration: CLIMetadata): ClassDecorator {
     return (constructor) => {
         return setClassMetadata(constructor, configuration);
     };

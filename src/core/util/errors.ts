@@ -1,3 +1,4 @@
+// WTF: What are you fucking doing ?!
 export function commandNotExecutable(name?: string) {
     if (name) {
         return name + ' is not a valid instance of `Executable`';
