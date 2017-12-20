@@ -1,5 +1,3 @@
-// OMG: SAY NO TO LODASH !!!!!
-import * as _ from 'lodash';
 import * as minimist from 'minimist';
 
 import { ParsedArgs } from './interfaces/parsed-args';
@@ -20,7 +18,7 @@ export class CommandParser {
     }
 
     private parseOptions() {
-        const args = _.cloneDeep(this.args);
+        const args = {...this.args};
         delete args._;
         return args;
     }
