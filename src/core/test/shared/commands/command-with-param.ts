@@ -4,7 +4,7 @@ import { Param } from '../../../param/param';
 
 @Command({
     name: 'with-param',
-    alias: 'wp',
+    alias: ['wp'],
 })
 export class CommandWithParam implements Executable {
     execute(

@@ -1,7 +1,7 @@
 import { Command, Executable, Param } from '@orbital/core';
 
 @Command({
-    name: 'param'
+    name: 'param',
 })
 export class CommandWithBadDecorator implements Executable {
     execute() {

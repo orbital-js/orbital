@@ -4,12 +4,12 @@ import { Option } from '../../../option/option';
 
 @Command({
     name: 'with-option',
-    alias: 'wo',
+    alias: ['wo'],
 })
 export class CommandWithOption implements Executable {
 
     @Option({
-        alias: 'n',
+        alias: ['n'],
     }) name: string;
 
     @Option({

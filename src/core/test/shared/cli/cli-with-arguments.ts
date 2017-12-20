@@ -2,7 +2,7 @@ import { CLI } from '@orbital/core';
 import { K } from '../class';
 
 @CLI({
-    name: 'test-cli'
+    name: 'test-cli',
 })
 export class CLIWithArguments {
     constructor(
