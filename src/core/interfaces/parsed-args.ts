@@ -1,5 +1,5 @@
 
-// OMG: DOC ?!!
+// TODO: DOC ?!!
 export interface ParsedArgs {
     name: string;
     arguments: string[];

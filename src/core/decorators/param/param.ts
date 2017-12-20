@@ -2,14 +2,14 @@ import { Logger } from '../../shared';
 
 import { ParamMetadata } from './param-metadata';
 
-// TODO: find better explanation
 /**
- * Instantiates a parameter in your function execution
- * @param param metadata object for parameter
+ * Decorator function defining a command parameter
+ *
+ * @param param configuration of the parameter
  */
 export function Param(param: ParamMetadata = {}): ParameterDecorator {
     return (target: any, propertyKey: string | symbol, index: number) => {
-        // WTF: This is the first time I am happy to see comments in a code because it is so obscure e.O
+        // TODO: This is the first time I am happy to see comments in a code because it is so obscure e.O
         // we can only apply parameters to `execute`
         if (propertyKey !== 'execute') {
             const err = '@Param() can only decorate arguments to execute(), but it was found decorating '

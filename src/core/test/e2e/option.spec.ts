@@ -4,7 +4,6 @@ import { GoodCLI } from '../shared/cli/good-cli';
 
 import { expect } from 'chai';
 
-// TODO: These are e2e test and do not belong to option decorator
 describe('Commands with Options', () => {
     // TODO: fix typing
     let factory;

@@ -2,7 +2,7 @@ import * as minimist from 'minimist';
 
 import { ParsedArgs } from './interfaces/parsed-args';
 
-// OMG: this have no tests either
+// TODO: Write unit tests
 export class CommandParser {
     private args: minimist.ParsedArgs;
 

@@ -1,5 +1,5 @@
 /**
- * TODO:
+ * Configuration for the `Option` decorator
  */
 export interface OptionMetadata {
     name?: string | symbol;

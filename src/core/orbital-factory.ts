@@ -9,12 +9,12 @@ import { arrayIsPopulated } from './util/array';
 import { getClassMetadata } from './reflection/class';
 import { CommandParser } from './command-parser';
 
-// WTF: Why Append static ?!!
+// TODO: Why Append static ?!!
 export class OrbitalFactoryStatic {
 
     private metadata: CLIMetadata;
     private CLIClass: Constructor<Executable>;
-    // WTF: Why `$` prefix please ?
+    // TODO: Why `$` prefix please ?
     private $inject: any[] = [];
 
     /**
@@ -22,7 +22,7 @@ export class OrbitalFactoryStatic {
      * injected with this function. Classes will automatically be instantiated.
      * @param depedencies the dependencies your CLI function may need to construct
      */
-    // WTF: What is even that inject thingy ?!!
+    // TODO: What is even that inject thingy ?!!
     inject(dependencies: any[]): this {
         this.$inject = dependencies;
         return this;
@@ -44,14 +44,14 @@ export class OrbitalFactoryStatic {
      */
     // execute(...args: any[]): void;
     execute(args: any[] = []): void {
-        // OMG: You is too long mate
+        // TODO: You is too long mate
         let executed = false;
         const commands = this.metadata.commands || [];
         const mapper = new CommandMapper();
         const parser = new CommandParser();
         const executor = new CommandExecutor();
 
-        // WTF: You make no sense mate...
+        // TODO: You make no sense mate...
         if (arrayIsPopulated(commands) && arrayIsPopulated(args)) {
             const commandMap = mapper.map(commands);
             const input = parser.parse(args);
@@ -66,7 +66,7 @@ export class OrbitalFactoryStatic {
         }
 
         if (!executed) {
-            // OMG: No to the new this.CLIClass !!
+            // TODO: No to the new this.CLIClass !!
             const cliInstance = new this.CLIClass(...this.$inject);
             if (isFunction(cliInstance.execute)) {
                 executed = true;

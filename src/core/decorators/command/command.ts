@@ -5,7 +5,7 @@ import { CommandMetadata } from './command-metadata';
 /**
  * Decorator function defining a CLI command
  *
- * @param configuration Declaration of a command
+ * @param configuration configuration of the command
  */
 export function Command(configuration: CommandMetadata): ClassDecorator {
     return (constructor: any) => {

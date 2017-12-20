@@ -2,7 +2,7 @@ import { CLI, Command } from '@orbital/core';
 // tslint:disable:max-classes-per-file
 // tslint:disable:no-empty
 
-// WTF: Why doesn't this use already defined command ?! KEEP IT DRY !
+// TODO: Why doesn't this use already defined command ?! KEEP IT DRY !
 @Command({
     name: 'alpha',
     alias: ['a', 'b'],
