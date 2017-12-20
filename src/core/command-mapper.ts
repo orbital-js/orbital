@@ -1,10 +1,11 @@
 import { CommandMap } from './interfaces/command-map';
-import { Logger } from './util/logger';
-import { getClassMetadata } from './reflection/class';
 
+import { getClassMetadata } from './reflection/class';
+import { Logger } from './shared';
+
+// WTF: what is a command mapper ?
 export class CommandMapper {
     private commands: CommandMap[] = [];
-    private logger = new Logger('Orbital');
 
     public map(commands: any[]): CommandMap[] | undefined {
         const commandInstances = commands.map(C => {
@@ -19,7 +20,6 @@ export class CommandMapper {
         for (let i = 0; i < commands.length; i++) {
             const commandInstance = commandInstances[i];
             const commandMetadata = commandMetadatas[i];
-
 
             if (typeof commandMetadata.alias === 'string') {
                 commandMetadata.alias = [commandMetadata.alias];
@@ -47,7 +47,7 @@ export class CommandMapper {
             } else {
                 const err = 'Command ' + commandMetadata.name
                     + ' does not have a method called execute, so it can not be run.';
-                this.logger.error(err);
+                Logger.error(err);
                 throw new Error(err);
             }
         }
@@ -58,7 +58,7 @@ export class CommandMapper {
         const commands = this.commands.filter(c => c.name === name);
         if (commands.length > 0) {
             const err = 'Two commands named "' + name + '" exist. Please rename or remove one of them.';
-            this.logger.error(err);
+            Logger.error(err);
             throw new Error(err);
         } else {
             return false;
@@ -76,7 +76,7 @@ export class CommandMapper {
                 for (const a of alias) {
                     if (aliases.indexOf(a) > -1) {
                         const error = 'Multiple commands with alias "' + a + '" exist: "' + name + '" and "' + c + '".';
-                        this.logger.error(error);
+                        Logger.error(error);
                         throw new Error(error);
                     }
                 }

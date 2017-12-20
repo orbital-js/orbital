@@ -4,16 +4,16 @@
   "description": "Typescript CLI framework for node",
   "scripts": {
     "start": "tsc",
-    "test": "TS_NODE_PROJECT=src/core/test mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts",
+    "test": "cross-env TS_NODE_PROJECT=src/core/test mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts",
     "cover": "nyc npm run test",
     "report-coverage": "npm run cover && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "chalk": "^2.3.0",
-    "is-constructor": "^1.0.2",
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
-    "reflect-metadata": "^0.1.10"
+    "reflect-metadata": "^0.1.10",
+    "winston": "^2.4.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.6",
@@ -21,8 +21,10 @@
     "@types/minimist": "^1.2.0",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.53",
+    "@types/winston": "^2.3.7",
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
+    "cross-env": "^5.1.1",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
     "ts-mockito": "^2.2.7",
@@ -43,8 +45,7 @@
     ],
     "exclude": [
       "src/**/test/",
-      "**/*.js",
-      "src/core/util/logger.ts"
+      "**/*.js"
     ],
     "reporter": [
       "text",

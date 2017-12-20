@@ -2,22 +2,22 @@ import { getClassMetadata, setClassMetadata } from '../reflection/class';
 
 import { Constructor } from '../util/constructor';
 import { Executable } from '../interfaces/executable';
-import { Logger } from '../util/logger';
+import { Logger } from '../shared';
 import { ParamMetadata } from './param-metadata';
 
+// TODO: find better explanation
 /**
  * Instantiates a parameter in your function execution
  * @param param metadata object for parameter
  */
 export function Param(param: ParamMetadata = {}): ParameterDecorator {
     return (target: any, propertyKey: string | symbol, index: number) => {
-
+        // WTF: This is the first time I am happy to see comments in a code because it is so obscure e.O
         // we can only apply parameters to `execute`
         if (propertyKey !== 'execute') {
-            const logger = new Logger('Orbital');
             const err = '@Param() can only decorate arguments to execute(), but it was found decorating '
                 + (propertyKey as string) + '().';
-            logger.error(err);
+            Logger.error(err);
             return;
         }
 

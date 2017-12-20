@@ -1,3 +1,4 @@
+// TODO: Add rule for mandatory non empty doc ?
 {
     "defaultSeverity": "error",
     "extends": [
@@ -12,7 +13,9 @@
         },
         "object-literal-sort-keys": false,
         "no-console": false,
-        "arrow-parens": false
+        "arrow-parens": false,
+        // TODO: This should maybe not be disabled but weakened ?
+        "member-ordering": false
     },
     "rulesDirectory": []
 }
