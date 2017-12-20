@@ -8,14 +8,7 @@ import { setClassMetadata } from '../../reflection/class';
  */
 export function CLI(configuration: CLIMetadata): ClassDecorator {
     return (constructor) => {
-        const commands = configuration.commands;
-        if (commands) {
-            if (commands.length !== 0 && commands[0] === undefined) {
-                throw Error('Undefined command');
-            }
-        }
         setClassMetadata(constructor, configuration);
-        // TODO: Check that all commands are actually decorated with @Command()
         return constructor;
     };
 }
