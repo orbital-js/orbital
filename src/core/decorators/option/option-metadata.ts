@@ -1,5 +1,5 @@
 /**
- * 
+ * TODO:
  */
 export interface OptionMetadata {
     name?: string | symbol;

@@ -4,4 +4,4 @@ import { CLI } from '@orbital/core';
     name: 'test-cli',
     commands: [{}],
 })
-export class BadCLINoClass { }
+export class BadCliNoClass { }

@@ -1,4 +1,4 @@
-import { TestCLI } from './shared/cli/test-cli';
+import { TestCLI } from '../shared/cli/test-cli';
 import { getClassMetadata } from '@orbital/core/reflection/class';
 
 import { expect } from 'chai';

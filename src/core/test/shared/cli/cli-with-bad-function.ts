@@ -1,10 +1,10 @@
-import { CLI, Command, Executable } from '@orbital/core';
-
+import { CLI } from '@orbital/core';
 import { CommandWithBadDecorator } from '../commands/command-with-bad-param';
-import { K } from '../class';
 
+
+// TODO: Why is this class named badParam while being in bad function file
 @CLI({
     name: 'test-cli',
-    commands: [CommandWithBadDecorator]
+    commands: [CommandWithBadDecorator],
 })
 export class CLIWithBadParam { }

@@ -1,10 +1,8 @@
-import { CLI, Command, Executable } from '@orbital/core';
-
-import { CommandWithBadDecorator } from '../commands/command-with-bad-param';
-import { K } from '../class';
+import { CLI, Command } from '@orbital/core';
 // tslint:disable:max-classes-per-file
 // tslint:disable:no-empty
 
+// OMG: These are copy pasted from an other cli file ! USE TEH SHARED ONE
 @Command({
     name: 'alpha',
     alias: ['a', 'b'],

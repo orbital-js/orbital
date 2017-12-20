@@ -1,5 +1,3 @@
-import { getClassMetadata, setClassMetadata } from '../../reflection/class';
-
 import { OptionMetadata } from './option-metadata';
 
 // OMG: DOC Oh ma gad ?!

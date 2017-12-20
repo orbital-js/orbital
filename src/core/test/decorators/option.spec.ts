@@ -1,16 +1,13 @@
-import { OrbitalFactory, OrbitalFactoryStatic } from '../orbital-factory';
-import { Constructor } from '@orbital/core/util/constructor';
-import { Executable } from '@orbital/core';
-import { commandNotExecutable } from '../util/errors';
+import { OrbitalFactory } from '@orbital/core';
 
-
-import { EmptyCLI } from './shared/cli/empty-cli';
-import { GoodCLI } from './shared/cli/good-cli';
+import { GoodCLI } from '../shared/cli/good-cli';
 
 import { expect } from 'chai';
 
+// TODO: These are e2e test and do not belong to option decorator
 describe('Commands with Options', () => {
-    let factory: OrbitalFactoryStatic;
+    // TODO: fix typing
+    let factory;
 
     beforeEach(() => {
         factory = OrbitalFactory.bootstrap(GoodCLI);
@@ -18,7 +15,9 @@ describe('Commands with Options', () => {
 
     it('options should be injected into the class', () => {
         const name = 'foo';
-        expect(() => factory.execute(['good-cli', 'with-option', '--name', name]))
+        expect(() => {
+            factory.execute(['good-cli', 'with-option', '--name', name]);
+        })
             .to.throw(name);
     });
 

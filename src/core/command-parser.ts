@@ -4,6 +4,7 @@ import * as minimist from 'minimist';
 
 import { ParsedArgs } from './interfaces/parsed-args';
 
+// OMG: this have no tests either
 export class CommandParser {
     private args: minimist.ParsedArgs;
 

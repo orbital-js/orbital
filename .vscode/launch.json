@@ -18,8 +18,11 @@
                 "tsconfig-paths/register",
                 "${workspaceRoot}/src/**/*.spec.ts"
             ],
+            "skipFiles": [
+                "${workspaceRoot}/node_modules"
+            ],
             "cwd": "${workspaceRoot}",
-            "protocol": "inspector",
+            "protocol": "inspector"
         }
     ],
     "compounds": []

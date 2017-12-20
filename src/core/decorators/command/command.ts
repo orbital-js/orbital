@@ -1,4 +1,4 @@
-import { getClassMetadata, setClassMetadata } from '../../reflection/class';
+import { setClassMetadata } from '../../reflection/class';
 
 import { CommandMetadata } from './command-metadata';
 

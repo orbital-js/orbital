@@ -1,22 +1,21 @@
-import { isFunction, isUndefined } from 'util';
+import { isFunction } from 'util';
 
 import { CLIMetadata } from './decorators/cli/cli-metadata';
 import { CommandExecutor } from './command-executor';
 import { CommandMapper } from './command-mapper';
-import { CommandParser } from './command-parser';
 import { Constructor } from './util/constructor';
 import { Executable } from './interfaces/executable';
 import { arrayIsPopulated } from './util/array';
-import { commandNotExecutable } from './util/errors';
 import { getClassMetadata } from './reflection/class';
+import { CommandParser } from './command-parser';
 
+// WTF: Why Append static ?!!
 export class OrbitalFactoryStatic {
 
     private metadata: CLIMetadata;
     private CLIClass: Constructor<Executable>;
     // WTF: Why `$` prefix please ?
     private $inject: any[] = [];
-    private commandParser = new CommandParser();
 
     /**
      * If your CLI class has constructor arguments, they can be
@@ -47,7 +46,7 @@ export class OrbitalFactoryStatic {
     execute(args: any[] = []): void {
         // OMG: You is too long mate
         let executed = false;
-        const { name = '', commands = [], version = '' } = this.metadata;
+        const commands = this.metadata.commands || [];
         const mapper = new CommandMapper();
         const parser = new CommandParser();
         const executor = new CommandExecutor();
@@ -57,8 +56,8 @@ export class OrbitalFactoryStatic {
             const commandMap = mapper.map(commands);
             const input = parser.parse(args);
             if (commandMap) {
-                const run = executor.execute(input, commandMap);
-                if (run) {
+                const hasRun = executor.execute(input, commandMap);
+                if (hasRun) {
                     executed = true;
                 } else {
                     throw new Error('Show help');

@@ -1,4 +1,3 @@
-import { getClassMetadata, setClassMetadata } from '../../reflection/class';
 import { Logger } from '../../shared';
 
 import { ParamMetadata } from './param-metadata';

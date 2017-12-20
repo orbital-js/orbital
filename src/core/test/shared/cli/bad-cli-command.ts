@@ -1,15 +1,15 @@
-import { CLI } from '@orbital/core';
-import { EmptyCommand } from '../commands/empty-command';
-import { Executable } from '../../../interfaces/executable';
+import { CLI, Executable } from '@orbital/core';
 import { TestCommand } from '../commands/command';
+import { EmptyCommand } from '../commands/empty-command';
 
 @CLI({
-    name: 'test-cli-with-command',
+    name: 'bad-cli-command',
     commands: [
         TestCommand,
         EmptyCommand,
+        'lol',
     ],
 })
-export class TestCliWithBadCommand implements Executable {
+export class BadCliCommand implements Executable {
     execute(...args: any[]) { throw new Error('Method not implemented'); }
 }

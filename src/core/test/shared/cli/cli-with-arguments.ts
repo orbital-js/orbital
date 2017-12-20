@@ -1,5 +1,4 @@
 import { CLI } from '@orbital/core';
-import { K } from '../class';
 
 @CLI({
     name: 'test-cli',

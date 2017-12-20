@@ -1,4 +1,4 @@
-import { Command, Executable } from '@orbital/core';
+import { Command } from '@orbital/core';
 
 @Command({
     name: 'empty-command',

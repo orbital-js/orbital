@@ -1,6 +1,6 @@
-import { Logger } from '../shared';
-import { format } from '../shared/logger/format';
-import { Level } from '../shared/logger/level';
+import { Logger } from '@orbital/core/shared';
+import { format } from '@orbital/core/shared/logger/format';
+import { Level } from '@orbital/core/shared/logger/level';
 
 import { expect } from 'chai';
 import chalk from 'chalk';

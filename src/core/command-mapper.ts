@@ -3,85 +3,59 @@ import { CommandMap } from './interfaces/command-map';
 import { getClassMetadata } from './reflection/class';
 import { Logger } from './shared';
 
-// WTF: what is a command mapper ?
 export class CommandMapper {
-    private commands: CommandMap[] = [];
+    public map(commands: any[]): CommandMap[] {
+        const mappedCommands: CommandMap[] = [];
 
-    public map(commands: any[]): CommandMap[] | undefined {
-        const commandInstances = commands.map(C => {
-            try {
-                const command = new C();
-                return command;
-            } catch (e) {
-                throw new Error('One of your commands is not an instance of `Executable`.');
-            }
-        });
-        const commandMetadatas = commands.map(c => getClassMetadata(c));
-        for (let i = 0; i < commands.length; i++) {
-            const commandInstance = commandInstances[i];
-            const commandMetadata = commandMetadatas[i];
+        for (const command of commands) {
+            const commandInstance = new command();
+            const commandMetadata = getClassMetadata(command);
 
-            if (typeof commandMetadata.alias === 'string') {
-                commandMetadata.alias = [commandMetadata.alias];
-            }
+            this.checkIfCommandNameIsFree(commandMetadata.name, mappedCommands);
+            this.checkIfAliasesAreFree(commandMetadata.alias, commandMetadata.name, mappedCommands);
 
-            this.isThereACommandNamed(commandMetadata.name);
-            this.isThereACommandWithAlias(commandMetadata.alias, commandMetadata.name);
-
-            if (commandInstance.execute) {
-
-                // for (const opt in commandInstance.constructor.options) {
-                //     if (typeof commandInstance.constructor.options[opt] === 'string') {
-                //         commandMetadata.options[opt] = [commandMetadata.options[opt]];
-                //     }
-                // }
-
-                this.commands.push({
-                    instance: commandInstance,
-                    name: commandMetadata.name,
-                    alias: commandMetadata.alias,
-                    params: commandInstance.constructor.params,
-                    options: commandInstance.constructor.options,
-                });
-
-            } else {
-                const err = 'Command ' + commandMetadata.name
-                    + ' does not have a method called execute, so it can not be run.';
-                Logger.error(err);
-                throw new Error(err);
-            }
+            mappedCommands.push({
+                instance: commandInstance,
+                name: commandMetadata.name,
+                alias: commandMetadata.alias,
+                params: commandInstance.constructor.params,
+                options: commandInstance.constructor.options,
+            });
         }
-        return this.commands;
+
+        return mappedCommands;
     }
 
-    private isThereACommandNamed(name: string) {
-        const commands = this.commands.filter(c => c.name === name);
-        if (commands.length > 0) {
-            const err = 'Two commands named "' + name + '" exist. Please rename or remove one of them.';
-            Logger.error(err);
-            throw new Error(err);
-        } else {
-            return false;
+    private checkIfCommandNameIsFree(name: string, commands: CommandMap[]): void {
+        const commandsWithSameName = commands.filter(c => c.name === name);
+        if (commandsWithSameName.length > 0) {
+            this.logAndThrow('CLI module defines two commands with the same name: ' + name);
         }
     }
 
-    private isThereACommandWithAlias(alias: string[], name: string) {
-        const aliasMap: any = {};
-        for (const command of this.commands) {
-            aliasMap[command.name] = command.alias;
-        }
-        for (const c in aliasMap) {
-            if (aliasMap[c]) {
-                const aliases = aliasMap[c];
-                for (const a of alias) {
-                    if (aliases.indexOf(a) > -1) {
-                        const error = 'Multiple commands with alias "' + a + '" exist: "' + name + '" and "' + c + '".';
-                        Logger.error(error);
-                        throw new Error(error);
-                    }
-                }
+    private checkIfAliasesAreFree(aliases: string[], commandName: string, commands: CommandMap[]): void {
+        for (const command of commands) {
+            if (command.alias) {
+                this.checkIfCommandDefinesAliases(command, aliases, commandName);
             }
         }
-        return false;
+    }
+
+    private checkIfCommandDefinesAliases(command: CommandMap, aliases: string[], commandName: string): void {
+        for (const a of aliases) {
+            const collisionIndex = command.alias.indexOf(a);
+            const aliasesCollides = collisionIndex > -1;
+            if (aliasesCollides) {
+                this.logAndThrow('CLI modules defines two commands with conflicting alias ['
+                    + command.alias[collisionIndex] + ']'
+                    + '\n\t' + commandName
+                    + '\n\t' + command.name);
+            }
+        }
+    }
+
+    private logAndThrow(message: string): void {
+        Logger.error(message);
+        throw new Error(message);
     }
 }

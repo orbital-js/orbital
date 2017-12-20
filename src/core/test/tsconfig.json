@@ -1,3 +1,4 @@
+// TODO: Move this at the top of the project and write spec along other files ?
 {
     "compilerOptions": {
         "module": "commonjs",
@@ -5,6 +6,7 @@
         "target": "es2017",
         "experimentalDecorators": true,
         "baseUrl": ".",
+        "noUnusedLocals": true,
         "paths": {
             "@orbital/*": ["../../*"]
         }

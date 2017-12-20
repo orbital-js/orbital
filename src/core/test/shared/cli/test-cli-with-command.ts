@@ -1,6 +1,4 @@
-import { CLI } from '@orbital/core';
-import { EmptyCommand } from '../commands/empty-command';
-import { Executable } from '../../../interfaces/executable';
+import { CLI, Executable } from '@orbital/core';
 import { TestCommand } from '../commands/command';
 
 @CLI({

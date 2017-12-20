@@ -6,4 +6,3 @@ export { Param } from './decorators/param/param';
 export { Option } from './decorators/option/option';
 
 export { Executable } from './interfaces/executable';
-
