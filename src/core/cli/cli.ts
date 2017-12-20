@@ -9,6 +9,7 @@ import { setClassMetadata } from '../reflection/class';
  */
 export function CLI(configuration: CLIMetadata): ClassDecorator {
     return (constructor) => {
-        return setClassMetadata(constructor, configuration);
+        setClassMetadata(constructor, configuration);
+        return constructor;
     };
 }
