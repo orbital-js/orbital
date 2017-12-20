@@ -1,9 +1,8 @@
 import { OrbitalFactory } from '@orbital/core';
-import { MultipleAliases } from './shared/cli/cli-with-multiple-aliases';
-import { MultipleNames } from './shared/cli/cli-with-multiple-names';
+import { MultipleAliases } from '../shared/cli/cli-with-multiple-aliases';
+import { MultipleNames } from '../shared/cli/cli-with-multiple-names';
 import { expect } from 'chai';
 
-// OMG: NO NO NO these are not fucking testing the command executor !!!
 describe('Commands with Params', () => {
     it('should throw if there are multiple commands with same alias', () => {
         const factory = OrbitalFactory.bootstrap(MultipleAliases);
