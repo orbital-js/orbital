@@ -1,8 +1,6 @@
-import { getClassMetadata, setClassMetadata } from '../reflection/class';
+import { getClassMetadata, setClassMetadata } from '../../reflection/class';
+import { Logger } from '../../shared';
 
-import { Constructor } from '../util/constructor';
-import { Executable } from '../interfaces/executable';
-import { Logger } from '../shared';
 import { ParamMetadata } from './param-metadata';
 
 // TODO: find better explanation

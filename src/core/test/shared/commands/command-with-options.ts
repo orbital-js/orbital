@@ -1,6 +1,4 @@
-import { Command } from '../../../command/command';
-import { Executable } from '../../../interfaces/executable';
-import { Option } from '../../../option/option';
+import { Command, Executable, Option } from '@orbital/core';
 
 @Command({
     name: 'with-option',

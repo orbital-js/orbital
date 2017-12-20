@@ -1,6 +1,6 @@
 import { isFunction, isUndefined } from 'util';
 
-import { CLIMetadata } from './cli/cli-metadata';
+import { CLIMetadata } from './decorators/cli/cli-metadata';
 import { CommandExecutor } from './command-executor';
 import { CommandMapper } from './command-mapper';
 import { CommandParser } from './command-parser';

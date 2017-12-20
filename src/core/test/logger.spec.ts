@@ -1,6 +1,7 @@
 import { Logger } from '../shared';
 import { format } from '../shared/logger/format';
 import { Level } from '../shared/logger/level';
+
 import { expect } from 'chai';
 import chalk from 'chalk';
 

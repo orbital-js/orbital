@@ -1,6 +1,5 @@
 import { CLIMetadata } from './cli-metadata';
-import { Constructor } from '../util/constructor';
-import { setClassMetadata } from '../reflection/class';
+import { setClassMetadata } from '../../reflection/class';
 
 /**
  * Decorator function defining the CLI entry point

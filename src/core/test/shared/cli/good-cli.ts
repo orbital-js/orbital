@@ -1,4 +1,4 @@
-import { CLI } from '../../../cli/cli';
+import { CLI } from '@orbital/core';
 import { CommandWithOption } from '../commands/command-with-options';
 import { CommandWithParam } from '../commands/command-with-param';
 import { Executable } from '../../../interfaces/executable';

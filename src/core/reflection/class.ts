@@ -4,7 +4,7 @@ import { Constructor } from '../util/constructor';
 import { Executable } from '../interfaces/executable';
 import { METADATA_KEY } from '../util/metadata';
 
-export function getClassMetadata(obj: Constructor<any>): void {
+export function getClassMetadata(obj: Constructor<any>): any {
     return Reflect.getOwnMetadata(METADATA_KEY, obj);
 }
 

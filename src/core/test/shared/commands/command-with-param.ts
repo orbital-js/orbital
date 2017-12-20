@@ -1,6 +1,4 @@
-import { Command } from '../../../command/command';
-import { Executable } from '../../../interfaces/executable';
-import { Param } from '../../../param/param';
+import { Command, Executable, Param } from '@orbital/core';
 
 @Command({
     name: 'with-param',

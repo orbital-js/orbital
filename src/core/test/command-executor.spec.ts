@@ -1,12 +1,16 @@
+// OMG: Unreadable imports! 
 import { OrbitalFactory, OrbitalFactoryStatic } from '../orbital-factory';
-
-import { CLIWithBadParam } from './shared/cli/cli-with-bad-function';
 import { Constructor } from '@orbital/core/util/constructor';
-import { EmptyCLI } from './shared/cli/empty-cli';
 import { Executable } from '@orbital/core';
+import { commandNotExecutable } from '../util/errors';
+
+
+import { EmptyCLI } from './shared/cli/empty-cli';
+import { CLIWithBadParam } from './shared/cli/cli-with-bad-function';
 import { MultipleAliases } from './shared/cli/cli-with-multiple-aliases';
 import { MultipleNames } from './shared/cli/cli-with-multiple-names';
-import { commandNotExecutable } from '../util/errors';
+
+
 import { expect } from 'chai';
 
 describe('Commands with Params', () => {

@@ -1,4 +1,4 @@
-import { getClassMetadata, setClassMetadata } from '../reflection/class';
+import { getClassMetadata, setClassMetadata } from '../../reflection/class';
 
 import { OptionMetadata } from './option-metadata';
 

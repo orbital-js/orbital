@@ -1,15 +1,16 @@
 import { OrbitalFactory, OrbitalFactoryStatic } from '../orbital-factory';
+import { Constructor } from '@orbital/core/util/constructor';
+import { Executable } from '@orbital/core';
 
 import { BadCLINoClass } from './shared/cli/bad-cli-no-class';
 import { CLIWithArguments } from './shared/cli/cli-with-arguments';
-import { Constructor } from '@orbital/core/util/constructor';
 import { EmptyCLI } from './shared/cli/empty-cli';
-import { Executable } from '@orbital/core';
 import { K } from 'shared/class';
 import { TestCLI } from './shared/cli/test-cli';
 import { TestCliWithBadCommand } from './shared/cli/bad-cli-command';
 import { TestCliWithCommand } from './shared/cli/test-cli-with-command';
 import { commandNotExecutable } from '../util/errors';
+
 import { expect } from 'chai';
 
 describe('OrbitalFactory', () => {

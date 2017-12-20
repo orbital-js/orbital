@@ -1,7 +1,7 @@
 import { Command, Executable } from '@orbital/core';
+import { getClassMetadata } from '@orbital/core/reflection/class';
 
 import { expect } from 'chai';
-import { getClassMetadata } from '@orbital/core/reflection/class';
 
 @Command({
     name: 'test-command',

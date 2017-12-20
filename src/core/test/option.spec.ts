@@ -1,10 +1,12 @@
 import { OrbitalFactory, OrbitalFactoryStatic } from '../orbital-factory';
-
 import { Constructor } from '@orbital/core/util/constructor';
-import { EmptyCLI } from './shared/cli/empty-cli';
 import { Executable } from '@orbital/core';
-import { GoodCLI } from './shared/cli/good-cli';
 import { commandNotExecutable } from '../util/errors';
+
+
+import { EmptyCLI } from './shared/cli/empty-cli';
+import { GoodCLI } from './shared/cli/good-cli';
+
 import { expect } from 'chai';
 
 describe('Commands with Options', () => {

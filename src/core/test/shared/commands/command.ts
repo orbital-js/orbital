@@ -1,5 +1,4 @@
-import { Command } from '../../../command/command';
-import { Executable } from '../../../interfaces/executable';
+import { Command, Executable } from '@orbital/core';
 
 @Command({
     name: 'test-command',

@@ -1,6 +1,7 @@
 import { TestCLI } from './shared/cli/test-cli';
-import { expect } from 'chai';
 import { getClassMetadata } from '@orbital/core/reflection/class';
+
+import { expect } from 'chai';
 
 /** TODO: Test should be split into two different projects
  *  Unit test which this is
