@@ -5,7 +5,7 @@ import { OptionMetadata } from './option-metadata';
  *
  * @param option configuration of the option
  */
-export function Option(option: OptionMetadata = {}): PropertyDecorator {
+export function Option(option: OptionMetadata = { name: '' }): PropertyDecorator {
     return (target: any, propertyKey: string | symbol) => {
 
         // the object map of options on the class
