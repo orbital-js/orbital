@@ -1,6 +1,5 @@
 import { transports, Logger as winstonLogger } from 'winston';
 
-import { isDevMode } from '../../orbital-ref';
 import { format } from './format';
 
 /**
