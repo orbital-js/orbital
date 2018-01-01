@@ -3,7 +3,7 @@ import { ParamMetadata } from '../decorators/param/param-metadata';
 import { Executable } from './executable';
 
 export type ModifiedParamMetadata = ParamMetadata & { index: number; };
-export type ModifiedOptionMetadata = OptionMetadata & { propertyKey: string; };
+export type ModifiedOptionMetadata = OptionMetadata & { propertyKey: string; name: string; };
 
 export interface CommandMapInstance {
     instance: Executable & any;
