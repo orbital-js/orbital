@@ -23,14 +23,14 @@ export class Logger {
     private constructor() { }
 
     public static info(message: any): void {
-        if (isDevMode()) { this.logger.info(message); }
+        this.logger.info(message);
     }
 
     public static warn(message: any): void {
-        if (isDevMode()) { this.logger.warn(message); }
+        this.logger.warn(message);
     }
 
     public static error(message: any): void {
-        if (isDevMode()) { this.logger.error(message); }
+        this.logger.error(message);
     }
 }
