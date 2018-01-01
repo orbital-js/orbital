@@ -1,6 +1,6 @@
 import { Logger } from '../../shared';
-
 import { ParamMetadata } from './param-metadata';
+import { getFunctionParameterName } from './param-name';
 
 /**
  * Decorator function defining a command parameter
@@ -25,8 +25,10 @@ export function Param(param: ParamMetadata = {}): ParameterDecorator {
             params = [];
         }
 
+        const propKey = getFunctionParameterName(target[propertyKey], index);
+
         // assign the parameter in the exact order we need it
-        params[index] = { ...param, index };
+        params[index] = { ...param, index, propertyKey: propKey };
 
         target.constructor.params = params;
     };
