@@ -1,4 +1,4 @@
-export { OrbitalFactory } from './orbital_factory';
+export { OrbitalFactory } from './orbital-factory';
 
 export { CLI } from './decorators/cli/cli';
 export { Command } from './decorators/command/command';
@@ -7,4 +7,4 @@ export { Option } from './decorators/option/option';
 
 export { Executable } from './interfaces/executable';
 
-export { isDevMode, enableProdMode } from './orbital_ref';
+export { isDevMode, enableProdMode } from './orbital-ref';

@@ -1,6 +1,6 @@
-import { CommandExecutor } from './command_executor';
-import { CommandMapper } from './command_mapper';
-import { CommandParser } from './command_parser';
+import { CommandExecutor } from './command-executor';
+import { CommandMapper } from './command-mapper';
+import { CommandParser } from './command-parser';
 import { CLIMetadata } from './decorators/cli/cli-metadata';
 import { getClassMetadata } from './reflection/class';
 import { arrayIsPopulated } from './util/array';
