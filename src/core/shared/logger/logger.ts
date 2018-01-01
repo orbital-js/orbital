@@ -1,4 +1,6 @@
-import { Logger as winstonLogger, transports } from 'winston';
+import { transports, Logger as winstonLogger } from 'winston';
+
+import { isDevMode } from '../../orbital_ref';
 import { format } from './format';
 
 /**
@@ -21,14 +23,14 @@ export class Logger {
     private constructor() { }
 
     public static info(message: any): void {
-        this.logger.info(message);
+        if (isDevMode()) { this.logger.info(message); }
     }
 
     public static warn(message: any): void {
-        this.logger.warn(message);
+        if (isDevMode()) { this.logger.warn(message); }
     }
 
     public static error(message: any): void {
-        this.logger.error(message);
+        if (isDevMode()) { this.logger.error(message); }
     }
 }

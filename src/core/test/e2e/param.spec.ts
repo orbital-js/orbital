@@ -1,9 +1,8 @@
 import { OrbitalFactory } from '@orbital/core';
-
-import { CLIWithBadParam } from '../shared/cli/cli-with-bad-function';
-import { GoodCLI } from '../shared/cli/good-cli';
-
 import { expect } from 'chai';
+
+import { CLIWithBadParam } from '../shared/cli/cli-with-bad-param';
+import { GoodCLI } from '../shared/cli/good-cli';
 
 describe('Commands with Params', () => {
     // TODO: fix typing

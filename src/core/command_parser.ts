@@ -8,6 +8,7 @@ export class CommandParser {
 
     parse(args: string[]): ParsedArgs {
         // TODO: Wrap external APIs
+        // why?
         this.args = minimist(args);
         // TODO: Remove side effect to make readability easier
         return {

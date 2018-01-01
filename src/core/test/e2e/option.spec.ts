@@ -1,8 +1,7 @@
 import { OrbitalFactory } from '@orbital/core';
+import { expect } from 'chai';
 
 import { GoodCLI } from '../shared/cli/good-cli';
-
-import { expect } from 'chai';
 
 describe('Commands with Options', () => {
     // TODO: fix typing

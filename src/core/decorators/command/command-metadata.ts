@@ -2,9 +2,19 @@
  * Configuration for the `Command` decorator.
  */
 export class CommandMetadata {
-    // The string under which your command will be executed
+    /**
+     * The standard name for your command. This should be a full word, or a hyphenated phrase
+     * and should succinctly describe the function that will be executed.
+     *
+     * Note: this will throw an error if the name is shared with another command
+     */
     name: string;
-    // Shorthand strings of the command name
+    /**
+     * An optional array of strings that serve as shorthands for the command. Typically an
+     * abbreviation of the words or the first letter(s) of the command name.
+     *
+     * Note: this will throw an error if any of the aliases are duplicate with another command.
+     */
     alias?: string[];
     // TODO: review this functionality
     subcommands?: any[];

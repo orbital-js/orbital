@@ -1,26 +1,13 @@
 import { OrbitalFactory } from '@orbital/core';
-
-import { TestCLI } from '../shared/cli/test-cli';
-import { TestCliWithCommand } from '../shared/cli/test-cli-with-command';
-import { EmptyCLI } from '../shared/cli/empty-cli';
-import { CLIWithArguments } from '../shared/cli/cli-with-arguments';
-
 import { expect } from 'chai';
+
+import { EmptyCLI } from '../shared/cli/empty-cli';
+import { TestCliWithCommand } from '../shared/cli/test-cli-with-command';
 
 describe('OrbitalFactory', () => {
 
     describe('Command Resolution', () => {
         // TODO: fix typing
-        let cli;
-
-        beforeEach(() => {
-            cli = OrbitalFactory.bootstrap(TestCLI);
-        });
-
-        it('should resolve master command if no commands are defined', () => {
-            expect(() => cli.execute(['test-cli']))
-                .to.throw('Master command');
-        });
 
         it('should resolve leaf command with corresponding name', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
@@ -38,22 +25,6 @@ describe('OrbitalFactory', () => {
             const emptyCli = OrbitalFactory.bootstrap(EmptyCLI);
             expect(() => emptyCli.execute())
                 .to.throw('Show help');
-        });
-    });
-
-    describe('Dependency Injection', () => {
-        // TODO: fix typing
-        let cli;
-
-        beforeEach(() => {
-            cli = OrbitalFactory
-                .inject(['hello'])
-                .bootstrap(CLIWithArguments);
-        });
-
-        it('should properly inject arguments if the class takes a constructor', () => {
-            expect(() => cli.execute(['test-cli']))
-                .to.throw('hello');
         });
     });
 });

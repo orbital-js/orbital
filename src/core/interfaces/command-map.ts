@@ -1,16 +1,17 @@
+import { OptionMetadata } from '../decorators/option/option-metadata';
+import { ParamMetadata } from '../decorators/param/param-metadata';
 import { Executable } from './executable';
 
-// TODO: Is a command map ?
-export interface CommandMap {
-    instance: Executable;
+export type ModifiedParamMetadata = ParamMetadata & { index: number; };
+export type ModifiedOptionMetadata = OptionMetadata & { propertyKey: string; };
+
+export interface CommandMapInstance {
+    instance: Executable & any;
     name: string;
     alias: string[];
     // subcommands: CommandMapObject[];
-    params: Array<{
-        index: number;
-        name?: string;
-    }>;
+    params: ModifiedParamMetadata[];
     options: {
-        [propName: string]: string | boolean;
+        [propName: string]: ModifiedOptionMetadata;
     };
 }
