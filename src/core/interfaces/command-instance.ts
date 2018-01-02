@@ -5,11 +5,10 @@ import { Executable } from './executable';
 export type ModifiedParamMetadata = ParamMetadata & { index: number; };
 export type ModifiedOptionMetadata = OptionMetadata & { propertyKey: string; name: string; };
 
-export interface CommandMapInstance {
+export interface CommandInstance {
     instance: Executable & any;
     name: string;
     alias: string[];
-    // subcommands: CommandMapObject[];
     params: ModifiedParamMetadata[];
     options: {
         [propName: string]: ModifiedOptionMetadata;

@@ -1,6 +1,6 @@
 import { CommandExecutor } from './command-executor';
 import { CommandMapper } from './command-mapper';
-import { CommandParser } from './command-parser';
+import { ArgumentParser } from './argument-parser';
 import { CLIMetadata } from './decorators/cli/cli-metadata';
 import { getClassMetadata } from './reflection/class';
 import { arrayIsPopulated } from './util/array';
@@ -29,15 +29,12 @@ export class OrbitalFactoryStatic {
     execute(args: any[] = []): void {
         let hasRun = false;
         const commands = this.metadata.commands || [];
-        const mapper = new CommandMapper();
-        const parser = new CommandParser();
-        const executor = new CommandExecutor();
 
         if (arrayIsPopulated(commands)) {
-            const commandMap = mapper.map(commands);
-            const input = parser.parse(args);
+            const commandMap = CommandMapper.map(commands);
+            const input = ArgumentParser.parseArguments(args);
             if (commandMap) {
-                hasRun = executor.execute(input, commandMap);
+                hasRun = CommandExecutor.execute(input, commandMap);
             }
         }
 

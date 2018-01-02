@@ -1,10 +1,10 @@
-import { CommandMapInstance } from './interfaces/command-map';
+import { CommandInstance } from './interfaces/command-instance';
 import { getClassMetadata } from './reflection/class';
 import { Logger } from './shared';
 
 export class CommandMapper {
-    public map(commands: any[]): CommandMapInstance[] {
-        const mappedCommands: CommandMapInstance[] = [];
+    public static map(commands: any[]): CommandInstance[] {
+        const mappedCommands: CommandInstance[] = [];
 
         for (const command of commands) {
             const commandInstance = new command();
@@ -25,14 +25,14 @@ export class CommandMapper {
         return mappedCommands;
     }
 
-    private checkIfCommandNameIsFree(name: string, commands: CommandMapInstance[]): void {
+    private static checkIfCommandNameIsFree(name: string, commands: CommandInstance[]): void {
         const commandsWithSameName = commands.filter(c => c.name === name);
         if (commandsWithSameName.length > 0) {
             this.logAndThrow('CLI module defines two commands with the same name: ' + name);
         }
     }
 
-    private checkIfAliasesAreFree(aliases: string[], commandName: string, commands: CommandMapInstance[]): void {
+    private static checkIfAliasesAreFree(aliases: string[], commandName: string, commands: CommandInstance[]): void {
         for (const command of commands) {
             if (command.alias) {
                 this.checkIfCommandDefinesAliases(command, aliases, commandName);
@@ -40,7 +40,11 @@ export class CommandMapper {
         }
     }
 
-    private checkIfCommandDefinesAliases(command: CommandMapInstance, aliases: string[], commandName: string): void {
+    private static checkIfCommandDefinesAliases(
+        command: CommandInstance,
+        aliases: string[],
+        commandName: string,
+    ): void {
         for (const a of aliases) {
             const collisionIndex = command.alias.indexOf(a);
             const aliasesCollides = collisionIndex > -1;
@@ -53,7 +57,7 @@ export class CommandMapper {
         }
     }
 
-    private logAndThrow(message: string): void {
+    private static logAndThrow(message: string): void {
         Logger.error(message);
         throw new Error(message);
     }

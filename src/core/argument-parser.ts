@@ -3,32 +3,31 @@ import * as minimist from 'minimist';
 import { ParsedArgs } from './interfaces/parsed-args';
 
 // TODO: Write unit tests
-export class CommandParser {
-    private args: minimist.ParsedArgs;
+export class ArgumentParser {
+    private static args: minimist.ParsedArgs;
 
-    parse(args: string[]): ParsedArgs {
+    public static parseArguments(args: string[]): ParsedArgs {
         // TODO: Wrap external APIs
-        // why?
+        // So we can write our own implementation easily if we want e.g. we're not dependent upon an external library.
         this.args = minimist(args);
-        // TODO: Remove side effect to make readability easier
         return {
             name: this.parseCommandName(),
             options: this.parseOptions(),
-            arguments: this.parseArguments(),
+            arguments: this.parseParameters(),
         };
     }
 
-    private parseOptions() {
+    private static parseOptions() {
         const args = {...this.args};
         delete args._;
         return args;
     }
 
-    private parseArguments() {
+    private static parseParameters() {
         return this.args._.slice(2);
     }
 
-    private parseCommandName() {
+    private static parseCommandName() {
         return this.args._[1];
     }
 }

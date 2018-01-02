@@ -1,14 +1,14 @@
-import { CommandMapInstance } from './interfaces/command-map';
+import { CommandInstance } from './interfaces/command-instance';
 import { ParsedArgs } from './interfaces/parsed-args';
+import { CommandResolver } from './command-resolver';
+import { OptionMetadata } from './decorators/option/option-metadata';
 
 export class CommandExecutor {
-    private map: CommandMapInstance[];
-
     // TODO: remove boolean and make it throw instead
     // There is no good reason to throw here, we just want to know if the command executed
-    public execute(args: ParsedArgs, map: CommandMapInstance[]): boolean {
-        this.map = map;
-        const command = this.resolveCommand(args.name);
+    public static execute(args: ParsedArgs, commands: CommandInstance[]): boolean {
+        const command = CommandResolver.findCommand(args.name, commands);
+
         if (!command) {
             return false;
         }
@@ -20,55 +20,34 @@ export class CommandExecutor {
         return true;
     }
 
-    // Find a command in the array
-    private resolveCommand(name: string) {
-        return this.resolveCommandWithName(name)
-            || this.resolveCommandWithAlias(name);
-    }
-
-    // Find a command with a given alias
-    private resolveCommandWithAlias(alias: string): any {
-        return this.map.find(c => (c.alias || []).indexOf(alias) > -1);
-    }
-
-    // Find a command with a given name
-    private resolveCommandWithName(name: string) {
-        return this.map.find(c => c.name === name);
-    }
-
-    // add the options into the class
-    private injectOptions(command: CommandMapInstance, args: ParsedArgs): void {
+    private static injectOptions(command: CommandInstance, args: ParsedArgs): void {
         for (const opt in command.options) {
             if (command.options.hasOwnProperty(opt)) {
-                this.assignOptions(command, opt, args);
+                const option = command.options[opt];
+                command.instance[option.propertyKey] = this.getOption(option, args);
             }
         }
     }
 
-    private assignOptions(command: CommandMapInstance, opt: string, args: ParsedArgs) {
-        const option = command.options[opt];
+    private static getOption(option: OptionMetadata, args: ParsedArgs) {
+        let result = null;
 
-        // If the options passed into the command
-        // match one of the options in the input
+        if (option.name && args.options[option.name]) {
+            result = args.options[option.name];
 
-        if (args.options[option.name]) {
-            // set the property of the option on the command class
-            command.instance[option.propertyKey] = args.options[option.name];
-
-        } else if (option.alias && option.alias.length) {
-            // if the command was instead passed an option as an alias
-            // inject the option that way
-            const aliasThatWasUsed = option.alias
+        } else if (option.alias && option.alias.length > 0) {
+            const aliasWasUsedInstead = option.alias
                 .find(a => args.options[a] !== undefined);
 
-            if (aliasThatWasUsed) {
-                command.instance[option.propertyKey] = args.options[aliasThatWasUsed];
+            if (aliasWasUsedInstead) {
+                result = args.options[aliasWasUsedInstead];
             }
-
         }
+
+        return result;
     }
 
-    private mapParameters(command: CommandMapInstance, args: ParsedArgs) {
+    private static mapParameters(command: CommandInstance, args: ParsedArgs) {
         const parameterMap = [];
         if (command.params) {
             for (const param of command.params) {
