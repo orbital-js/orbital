@@ -16,6 +16,8 @@ export class CommandMetadata {
      * Note: this will throw an error if any of the aliases are duplicate with another command.
      */
     alias?: string[];
-    // TODO: review this functionality
+    /**
+     * @ignore Not yet implemented
+     */
     subcommands?: any[];
 }

@@ -5,7 +5,6 @@ import { CLIWithBadParam } from '../shared/cli/cli-with-bad-param';
 import { GoodCLI } from '../shared/cli/good-cli';
 
 describe('Commands with Params', () => {
-    // TODO: fix typing
     let cli;
 
     before(() => {

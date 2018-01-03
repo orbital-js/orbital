@@ -7,7 +7,6 @@ import { TestCliWithCommand } from '../shared/cli/test-cli-with-command';
 describe('OrbitalFactory', () => {
 
     describe('Command Resolution', () => {
-        // TODO: fix typing
 
         it('should resolve leaf command with corresponding name', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);

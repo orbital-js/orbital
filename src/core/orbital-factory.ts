@@ -6,9 +6,6 @@ import { getClassMetadata } from './reflection/class';
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
 
-// WBH
-// TODO: Review this. Probably not a good idea to chain functions this much,
-// it can just be in one `bootstrap` function.
 export class OrbitalFactoryStatic {
 
     private metadata: CLIMetadata;
