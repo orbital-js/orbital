@@ -7,4 +7,4 @@ export { Option } from './decorators/option/option';
 
 export { Executable } from './interfaces/executable';
 
-export { isDevMode, enableProdMode } from './orbital-ref';
+export { BuildConfiguration } from './build-configuration';
