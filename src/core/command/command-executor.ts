@@ -1,23 +1,25 @@
-import { CommandInstance } from './interfaces/command-instance';
-import { ParsedArgs } from './interfaces/parsed-args';
+import { CommandInstance } from './command-instance';
+import { ParsedArgs } from '../argument/parsed-args';
 import { CommandResolver } from './command-resolver';
-import { OptionMetadata } from './decorators/option/option-metadata';
+import { OptionMetadata } from '../decorators/option/option-metadata';
 
 export class CommandExecutor {
-    // TODO: remove boolean and make it throw instead
-    // There is no good reason to throw here, we just want to know if the command executed
-    public static execute(args: ParsedArgs, commands: CommandInstance[]): boolean {
-        const command = CommandResolver.findCommand(args.name, commands);
-
-        if (!command) {
-            return false;
-        }
-
+    public static execute(args: ParsedArgs, commands: CommandInstance[]) {
+        const resolver = new CommandResolver(commands);
+        const command = resolver.findCommand(args.name);
+        const params = this.getParameters(command, args);
         this.injectOptions(command, args);
-        const params = this.mapParameters(command, args);
         command.instance.execute(...params);
+    }
 
-        return true;
+    private static getParameters(command: CommandInstance, args: ParsedArgs) {
+        const parameters = [];
+        if (command.params) {
+            for (const param of command.params) {
+                parameters[param.index] = args.arguments[param.index];
+            }
+        }
+        return parameters;
     }
 
     private static injectOptions(command: CommandInstance, args: ParsedArgs): void {
@@ -30,11 +32,10 @@ export class CommandExecutor {
     }
 
     private static getOption(option: OptionMetadata, args: ParsedArgs) {
-        let result = null;
+        let result;
 
         if (option.name && args.options[option.name]) {
             result = args.options[option.name];
-
         } else if (option.alias && option.alias.length > 0) {
             const aliasWasUsedInstead = option.alias
                 .find(a => args.options[a] !== undefined);
@@ -45,15 +46,5 @@ export class CommandExecutor {
         }
 
         return result;
-    }
-
-    private static mapParameters(command: CommandInstance, args: ParsedArgs) {
-        const parameterMap = [];
-        if (command.params) {
-            for (const param of command.params) {
-                parameterMap[param.index] = args.arguments[param.index];
-            }
-        }
-        return parameterMap;
     }
 }

@@ -1,10 +1,16 @@
-import { CommandExecutor } from './command-executor';
-import { CommandMapper } from './command-mapper';
-import { ArgumentParser } from './argument-parser';
-import { CLIMetadata } from './decorators/cli/cli-metadata';
-import { getClassMetadata } from './reflection/class';
+import { CommandExecutor } from './command/command-executor';
+import { CommandMapper } from './command/command-mapper';
+import { CommandNotFound } from './command/command-not-found';
+import { CommandInstance } from './command/command-instance';
+
+import { ParsedArgs } from './argument/parsed-args';
+
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
+
+import { ArgumentParser } from './argument/argument-parser';
+import { CLIMetadata } from './decorators/cli/cli-metadata';
+import { getClassMetadata } from './reflection/class';
 
 export class OrbitalFactoryStatic {
 
@@ -28,17 +34,39 @@ export class OrbitalFactoryStatic {
         const commands = this.metadata.commands || [];
 
         if (arrayIsPopulated(commands)) {
-            const commandMap = CommandMapper.map(commands);
-            const input = ArgumentParser.parseArguments(args);
-            if (commandMap) {
-                hasRun = CommandExecutor.execute(input, commandMap);
+            const commandMapper = new CommandMapper(commands);
+            const commandInstances = commandMapper.map();
+
+            if (commandInstances) {
+                const input = ArgumentParser.parseArguments(args);
+                hasRun = this.tryRunCommand(input, commandInstances);
             }
         }
 
         if (!hasRun) {
             throw new Error('Show help');
-            // TODO: SHOW HELP
         }
+    }
+
+    private tryRunCommand(input: ParsedArgs, commandInstances: CommandInstance[]) {
+        let hasRun = true;
+        try {
+            /**
+             * FIXME: this behavior is wrong, atleast until we have custom compiler
+             * We should resolve command names before mapping them and executing only one
+             * It would be better performancewise as of now
+             *
+             * Won't matter anymore when we'll have a custom compiler because they'll be mapped at compile time anyway
+             */
+            CommandExecutor.execute(input, commandInstances);
+        } catch (error) {
+            if (error instanceof CommandNotFound) {
+                hasRun = false;
+            } else {
+                throw error;
+            }
+        }
+        return hasRun;
     }
 }
 

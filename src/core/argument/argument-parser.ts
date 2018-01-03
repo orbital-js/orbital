@@ -1,6 +1,6 @@
 import * as minimist from 'minimist';
 
-import { ParsedArgs } from './interfaces/parsed-args';
+import { ParsedArgs } from './parsed-args';
 
 export class ArgumentParser {
     private static args: minimist.ParsedArgs;
