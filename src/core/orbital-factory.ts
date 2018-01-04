@@ -1,14 +1,11 @@
-import { CommandExecutor } from './command/command-executor';
-import { CommandMapper } from './command/command-mapper';
-import { CommandNotFound } from './command/command-not-found';
-import { CommandInstance } from './command/command-instance';
+import { CommandExecutor, CommandMapper, CommandInstance, CommandNotFoundError } from './command';
 
 import { ParsedArgs } from './argument/parsed-args';
+import { ArgumentParser } from './argument/argument-parser';
 
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
 
-import { ArgumentParser } from './argument/argument-parser';
 import { CLIMetadata } from './decorators/cli/cli-metadata';
 import { getClassMetadata } from './reflection/class';
 
@@ -60,7 +57,7 @@ export class OrbitalFactoryStatic {
              */
             CommandExecutor.execute(input, commandInstances);
         } catch (error) {
-            if (error instanceof CommandNotFound) {
+            if (error instanceof CommandNotFoundError) {
                 hasRun = false;
             } else {
                 throw error;

@@ -1,5 +1,5 @@
 import { CommandInstance } from './command-instance';
-import { CommandNotFound } from './command-not-found';
+import { CommandNotFoundError } from './command-not-found-error';
 
 export class CommandResolver {
     constructor(private commands: any[]) { }
@@ -9,7 +9,7 @@ export class CommandResolver {
             || this.findCommandWithAlias(name);
 
         if (!command) {
-            throw new CommandNotFound(name);
+            throw new CommandNotFoundError(name);
         }
 
         return command;
