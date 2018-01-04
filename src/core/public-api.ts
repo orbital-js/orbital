@@ -7,4 +7,4 @@ export { Option } from './decorators/option/option';
 
 export { Executable } from './executable';
 
-export { BuildConfiguration } from './build-configuration';
+export { enableProdMode, isDevMode } from './build-configuration';
