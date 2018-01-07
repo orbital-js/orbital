@@ -1,4 +1,5 @@
-import { Logger as winstonLogger, transports } from 'winston';
+import { transports, Logger as winstonLogger } from 'winston';
+
 import { format } from './format';
 
 /**

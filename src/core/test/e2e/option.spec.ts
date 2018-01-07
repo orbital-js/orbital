@@ -1,46 +1,44 @@
 import { OrbitalFactory } from '@orbital/core';
+import { expect } from 'chai';
 
 import { GoodCLI } from '../shared/cli/good-cli';
 
-import { expect } from 'chai';
-
 describe('Commands with Options', () => {
-    // TODO: fix typing
-    let factory;
+    let cli;
 
     beforeEach(() => {
-        factory = OrbitalFactory.bootstrap(GoodCLI);
+        cli = OrbitalFactory.bootstrap(GoodCLI);
     });
 
     it('options should be injected into the class', () => {
         const name = 'foo';
         expect(() => {
-            factory.execute(['good-cli', 'with-option', '--name', name]);
+            cli.execute(['good-cli', 'with-option', '--name', name]);
         })
             .to.throw(name);
     });
 
     it('option aliases should be equivalent to options', () => {
         const name = 'foo';
-        expect(() => factory.execute(['good-cli', 'with-option', '-n', name]))
+        expect(() => cli.execute(['good-cli', 'with-option', '-n', name]))
             .to.throw(name);
     });
 
     it('should allow there to be multiple aliases', () => {
         const name = 'foo';
-        expect(() => factory.execute(['good-cli', 'with-option', '--opt', name]))
+        expect(() => cli.execute(['good-cli', 'with-option', '--opt', name]))
             .to.throw(name);
     });
 
     it('should override name property from propertyKey', () => {
         const name = 'foo';
-        expect(() => factory.execute(['good-cli', 'with-option', '--override', name]))
+        expect(() => cli.execute(['good-cli', 'with-option', '--override', name]))
             .to.throw(name);
     });
 
     it('should override name property from propertyKey', () => {
         const name = 'foo';
-        expect(() => factory.execute(['good-cli', 'with-option', '--emptyOption', name]))
+        expect(() => cli.execute(['good-cli', 'with-option', '--emptyOption', name]))
             .to.throw(name);
     });
 });

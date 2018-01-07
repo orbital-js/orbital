@@ -8,14 +8,15 @@ import { OptionMetadata } from './option-metadata';
 export function Option(option: OptionMetadata = {}): PropertyDecorator {
     return (target: any, propertyKey: string | symbol) => {
 
-        // TODO: option[s] for a single option ?!!
+        // the object map of options on the class
         let options = target.constructor.options;
 
         if (!option.name) {
             option.name = propertyKey;
         }
 
-        // TODO: ???
+        // an object with the propertyKey stored on the
+        // object to inject it back into the class later
         const optionSpread = { ...option, propertyKey };
 
         if (options) {
