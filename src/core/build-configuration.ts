@@ -1,5 +1,5 @@
-let devMode: boolean = true;
-let runModeLocked: boolean = false;
+export let devMode: boolean = true;
+export let runModeLocked: boolean = false;
 
 export function enableProdMode(): void {
     if (runModeLocked) {

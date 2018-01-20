@@ -14,16 +14,16 @@ describe('OrbitalFactory', () => {
                 .to.throw('Leaf command');
         });
 
-        it('should throw if command does not exist', () => {
+        it('should show help if command does not exist', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
-            expect(() => testCliWithCommand.execute(['test-cli-with-command', 'non-exist-command']))
-                .to.throw('Show help');
+            expect(testCliWithCommand.execute(['test-cli-with-command', 'non-exist-command']))
+                .to.equal(false);
         });
 
         it('should throw show help if no commands nor execute method are provided', () => {
             const emptyCli = OrbitalFactory.bootstrap(EmptyCLI);
-            expect(() => emptyCli.execute())
-                .to.throw('Show help');
+            expect(emptyCli.execute())
+                .to.equal(false);
         });
     });
 });
