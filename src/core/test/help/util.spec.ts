@@ -37,6 +37,10 @@ describe('Help Utilities', () => {
         it('should indent the string by four spaces n times', () => {
             expect(indent(3, 'hello')).to.equal('            hello');
         });
+
+        it('should indent nothing by 0 if nothing is passed in', () => {
+            expect(indent()).to.equal('');
+        });
     });
 
     describe('generateCommandUsage', () => {
