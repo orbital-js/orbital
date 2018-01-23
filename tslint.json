@@ -6,6 +6,7 @@
     "rules": {
         "interface-name": false,
         "ordered-imports": false,
+        "trailing-comma": false,
         "member-access": false,
         "quotemark": {
             "options": "single"

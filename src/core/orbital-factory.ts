@@ -1,13 +1,11 @@
-import { CommandExecutor, CommandMapper, CommandInstance, CommandNotFoundError } from './command';
-
-import { ParsedArgs } from './argument/parsed-args';
 import { ArgumentParser } from './argument/argument-parser';
-
+import { ParsedArgs } from './argument/parsed-args';
+import { CommandExecutor, CommandInstance, CommandMapper, CommandNotFoundError } from './command';
+import { CLIMetadata } from './decorators/cli/cli-metadata';
+import { HelpGenerator } from './help/help';
+import { getClassMetadata } from './reflection/class';
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
-
-import { CLIMetadata } from './decorators/cli/cli-metadata';
-import { getClassMetadata } from './reflection/class';
 
 export class OrbitalFactoryStatic {
 
@@ -26,13 +24,14 @@ export class OrbitalFactoryStatic {
      * This actually tells Node to run your CLI.
      * @param args pass in your process.argv
      */
-    execute(args: any[] = []): void {
+    execute(args: any[] = []): boolean {
         let hasRun = false;
         const commands = this.metadata.commands || [];
+        let commandInstances: CommandInstance[] = [];
 
         if (arrayIsPopulated(commands)) {
             const commandMapper = new CommandMapper(commands);
-            const commandInstances = commandMapper.map();
+            commandInstances = commandMapper.map();
 
             if (commandInstances) {
                 const input = ArgumentParser.parseArguments(args);
@@ -41,8 +40,10 @@ export class OrbitalFactoryStatic {
         }
 
         if (!hasRun) {
-            throw new Error('Show help');
+            const help = new HelpGenerator(this.metadata, commandInstances);
+            help.generateGlobalDocs();
         }
+        return hasRun;
     }
 
     private tryRunCommand(input: ParsedArgs, commandInstances: CommandInstance[]) {

@@ -1,6 +1,7 @@
-import { CommandInstance } from './command-instance';
 import { getClassMetadata } from '../reflection/class';
+import { getParamTypes, } from '../reflection/types';
 import { Logger } from '../shared';
+import { CommandInstance } from './command-instance';
 
 export class CommandMapper {
     private commandInstances: CommandInstance[] = [];
@@ -19,6 +20,7 @@ export class CommandMapper {
     private createInstance(command: any) {
         const commandInstance = new command();
         const commandMetadata = getClassMetadata(command);
+        const paramTypes = getParamTypes(commandInstance, 'execute');
 
         this.checkIfCommandNameIsFree(commandMetadata.name);
         this.checkIfAliasesAreFree(commandMetadata.alias, commandMetadata.name);
@@ -27,8 +29,10 @@ export class CommandMapper {
             instance: commandInstance,
             name: commandMetadata.name,
             alias: commandMetadata.alias,
+            description: commandMetadata.description,
             params: commandInstance.constructor.params,
             options: commandInstance.constructor.options,
+            paramTypes
         };
     }
 

@@ -20,4 +20,8 @@ export class CommandMetadata {
      * @ignore Not yet implemented
      */
     subcommands?: any[];
+    /**
+     * A description for the command: what does it do?
+     */
+    description?: string;
 }
