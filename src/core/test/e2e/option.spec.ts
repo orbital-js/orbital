@@ -43,9 +43,8 @@ describe('Commands with Options', () => {
     });
 
     it('should use default value if not set', () => {
-        const def = 'def';
         expect(() => cli.execute(['good-cli', 'with-option', '--enableDef']))
-            .to.throw(def);
+            .to.throw('def');
     });
 
     it('should override default value if set', () => {
