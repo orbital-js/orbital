@@ -26,7 +26,10 @@ export class CommandExecutor {
         for (const opt in command.options) {
             if (command.options.hasOwnProperty(opt)) {
                 const option = command.options[opt];
-                command.instance[option.propertyKey] = this.getOption(option, args);
+                const value = this.getOption(option, args);
+                if (value) {
+                    command.instance[option.propertyKey] = value;
+                }
             }
         }
     }

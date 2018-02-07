@@ -15,6 +15,14 @@ export class CommandWithOption implements Executable {
         name: 'override',
     }) option: string;
 
+    @Option({
+        alias: ['d'],
+    }) default: string = 'def';
+
+    @Option({
+        alias: ['enable'],
+    }) enableDef: boolean;
+
     @Option() emptyOption: string;
 
     execute() {
@@ -22,6 +30,8 @@ export class CommandWithOption implements Executable {
             throw new Error(this.emptyOption);
         } else if (this.option) {
             throw new Error(this.option);
+        } else if (this.enableDef) {
+            throw new Error(this.default);
         } else {
             throw new Error(this.name);
         }
