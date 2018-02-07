@@ -1,5 +1,14 @@
-import { CLIMetadata } from './cli-metadata';
-import { setClassMetadata } from '../../reflection/class';
+import { setClassMetadata } from '../reflection/class';
+
+/**
+ * Configuration for the `CLI` decorator.
+ */
+export interface CLIMetadata {
+    name?: string;
+    version?: string;
+    commands?: any[];
+}
+
 
 /**
  * Decorator function defining the CLI entry point

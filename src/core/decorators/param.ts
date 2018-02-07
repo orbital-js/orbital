@@ -1,6 +1,15 @@
-import { Logger } from '../../shared';
-import { ParamMetadata } from './param-metadata';
-import { getFunctionParameterName } from './param-name';
+import { Logger } from '../shared';
+import { getFunctionParameterName } from '../util/param-name';
+
+/**
+ * Configuration for the `Param` decorator
+ */
+export interface ParamMetadata {
+    name?: string;
+    brief?: string;
+    required?: boolean;
+    description?: string;
+}
 
 /**
  * Decorator function defining a command parameter

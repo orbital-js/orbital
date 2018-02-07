@@ -1,7 +1,9 @@
+import { setClassMetadata } from '../reflection/class';
+
 /**
  * Configuration for the `Command` decorator.
  */
-export class CommandMetadata {
+export interface CommandMetadata {
     /**
      * The standard name for your command. This should be a full word, or a hyphenated phrase
      * and should succinctly describe the function that will be executed.
@@ -24,4 +26,17 @@ export class CommandMetadata {
      * A description for the command: what does it do?
      */
     description?: string;
+}
+
+
+/**
+ * Decorator function defining a CLI command
+ *
+ * @param configuration configuration of the command
+ */
+export function Command(configuration: CommandMetadata): ClassDecorator {
+    return (constructor: any) => {
+        setClassMetadata(constructor, configuration);
+        return constructor;
+    };
 }

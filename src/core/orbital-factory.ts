@@ -1,7 +1,7 @@
 import { ArgumentParser } from './argument/argument-parser';
 import { ParsedArgs } from './argument/parsed-args';
 import { CommandExecutor, CommandInstance, CommandMapper, CommandNotFoundError } from './command';
-import { CLIMetadata } from './decorators/cli/cli-metadata';
+import { CLIMetadata } from './decorators/cli';
 import { HelpGenerator } from './help/help';
 import { getClassMetadata } from './reflection/class';
 import { arrayIsPopulated } from './util/array';
@@ -9,7 +9,7 @@ import { Constructor } from './util/constructor';
 
 export class OrbitalFactoryStatic {
 
-    private metadata: CLIMetadata;
+    private metadata: CLIMetadata = {};
 
     /**
      * Constructs dependency tree and puts commands in their place.

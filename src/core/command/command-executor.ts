@@ -1,7 +1,7 @@
 import { CommandInstance } from './command-instance';
 import { ParsedArgs } from '../argument/parsed-args';
 import { CommandResolver } from './command-resolver';
-import { OptionMetadata } from '../decorators/option/option-metadata';
+import { OptionMetadata } from '../decorators/option';
 
 export class CommandExecutor {
     public static execute(args: ParsedArgs, commands: CommandInstance[]) {
@@ -38,7 +38,7 @@ export class CommandExecutor {
             result = args.options[option.name];
         } else if (option.alias && option.alias.length > 0) {
             const aliasWasUsedInstead = option.alias
-                .find(a => args.options[a] !== undefined);
+                .find((a: string) => args.options[a] !== undefined);
 
             if (aliasWasUsedInstead) {
                 result = args.options[aliasWasUsedInstead];

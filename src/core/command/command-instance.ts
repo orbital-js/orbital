@@ -1,5 +1,5 @@
-import { OptionMetadata } from '../decorators/option/option-metadata';
-import { ParamMetadata } from '../decorators/param/param-metadata';
+import { OptionMetadata } from '../decorators/option';
+import { ParamMetadata } from '../decorators/param';
 import { Executable } from '../executable';
 
 export type ModifiedParamMetadata = ParamMetadata & { index: number; };

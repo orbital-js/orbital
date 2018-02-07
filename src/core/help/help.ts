@@ -1,5 +1,5 @@
 import { CommandInstance } from '../command/command-instance';
-import { CLIMetadata } from '../decorators/cli/cli-metadata';
+import { CLIMetadata } from '../decorators/cli';
 import { generateCommandUsage } from './util';
 
 export class HelpGenerator {

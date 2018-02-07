@@ -1,9 +1,9 @@
 export { OrbitalFactory } from './orbital-factory';
 
-export { CLI } from './decorators/cli/cli';
-export { Command } from './decorators/command/command';
-export { Param } from './decorators/param/param';
-export { Option } from './decorators/option/option';
+export { CLI } from './decorators/cli';
+export { Command } from './decorators/command';
+export { Param } from './decorators/param';
+export { Option } from './decorators/option';
 
 export { Executable } from './executable';
 
