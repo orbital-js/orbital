@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/orbital-js/orbital.svg?branch=master)](https://travis-ci.org/orbital-js/orbital)
-[![Coverage Status](https://coveralls.io/repos/github/orbital-js/orbital/badge.svg)](https://coveralls.io/github/orbital-js/orbital)
+[![Maintainability](https://api.codeclimate.com/v1/badges/364c8388bfb17ce315f7/maintainability)](https://codeclimate.com/github/orbital-js/orbital/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/364c8388bfb17ce315f7/test_coverage)](https://codeclimate.com/github/orbital-js/orbital/test_coverage)
 [![Join the chat at https://gitter.im/orbital-js/orbital](https://badges.gitter.im/orbital-js/orbital.svg)](https://gitter.im/orbital-js/orbital?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 # Orbital
 Orbital is a dead-simple, cutting-edge CLI framework. Taking cues from [Angular](https://www.angular.io) and [Clime](https://github.com/vilic/clime), Orbital was designed with simplicity and scalability in mind.
