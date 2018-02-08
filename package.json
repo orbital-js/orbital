@@ -4,9 +4,7 @@
   "description": "Typescript CLI framework for node",
   "scripts": {
     "start": "tsc",
-    "test": "cross-env TS_NODE_PROJECT=src/core/test mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts",
-    "cover": "nyc npm run test",
-    "report-coverage": "npm run cover && nyc report --reporter=text-lcov | coveralls"
+    "test": "cross-env TS_NODE_PROJECT=src/core/test nyc mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts"
   },
   "dependencies": {
     "chalk": "^2.3.0",
