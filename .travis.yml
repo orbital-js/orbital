@@ -8,4 +8,5 @@ node_js:
   - "node"
 after_success:
   - nyc report --reporter=lcov
+  - cat coverage/lcov.info
   - ./cc-test-reporter after-build --debug --exit-code $TRAVIS_TEST_RESULT
