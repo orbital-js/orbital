@@ -7,6 +7,7 @@ node_js:
   - "lts/*"
   - "node"
 after_success:
+  - nyc npm test
   - nyc report --reporter=lcov
   - cat coverage/lcov.info
   - ./cc-test-reporter after-build --debug --exit-code $TRAVIS_TEST_RESULT
