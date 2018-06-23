@@ -1,7 +1,7 @@
-import { CommandInstance } from './command-instance';
 import { ParsedArgs } from '../argument/parsed-args';
-import { CommandResolver } from './command-resolver';
 import { OptionMetadata } from '../decorators/option';
+import { CommandInstance } from './command-instance';
+import { CommandResolver } from './command-resolver';
 
 export class CommandExecutor {
     public static execute(args: ParsedArgs, commands: CommandInstance[]) {
@@ -24,24 +24,24 @@ export class CommandExecutor {
 
     private static injectOptions(command: CommandInstance, args: ParsedArgs): void {
         for (const opt in command.options) {
-            if (command.options.hasOwnProperty(opt)) {
-                const option = command.options[opt];
-                const value = this.getOption(option, args);
-                if (value) {
-                    command.instance[option.propertyKey] = value;
-                }
+
+            const option = command.options[opt];
+            const value = this.getOption(option, args);
+            if (value) {
+                command.instance[option.propertyKey] = value;
             }
+
         }
     }
 
     private static getOption(option: OptionMetadata, args: ParsedArgs) {
         let result;
-
-        if (option.name && args.options[option.name]) {
-            result = args.options[option.name];
-        } else if (option.alias && option.alias.length > 0) {
-            const aliasWasUsedInstead = option.alias
-                .find((a: string) => args.options[a] !== undefined);
+        const name = option.name as string;
+        const alias = option.alias;
+        if (name && args.options[name]) {
+            result = args.options[name];
+        } else if (alias && alias.length > 0) {
+            const aliasWasUsedInstead = alias.find((a: string) => args.options[a] !== undefined);
 
             if (aliasWasUsedInstead) {
                 result = args.options[aliasWasUsedInstead];

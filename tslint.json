@@ -20,6 +20,7 @@
                 "order": "instance-sandwich"
             }
         ],
+        "forin": false,
         "no-unused-expression": true,
         "no-unused-variable": true,
         "variable-name": [

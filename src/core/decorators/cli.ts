@@ -5,10 +5,10 @@ import { setClassMetadata } from '../reflection/class';
  */
 export interface CLIMetadata {
     name?: string;
+    prettyName?: string;
     version?: string;
     commands?: any[];
 }
-
 
 /**
  * Decorator function defining the CLI entry point

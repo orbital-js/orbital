@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { getType } from '../reflection/types';
 
 /**
@@ -25,9 +26,12 @@ export function Option(option: OptionMetadata = {}): PropertyDecorator {
             option.name = propertyKey;
         }
 
-        const rawType = getType(target, propertyKey as string);
+        const rawType = getType(target, propertyKey);
 
-        const type = rawType ? rawType.name : 'any';
+        const type = rawType.name !== 'Object' ? rawType.name : 'any';
+        console.log(type);
+
+
 
         // an object with the propertyKey stored on the
         // object to inject it back into the class later

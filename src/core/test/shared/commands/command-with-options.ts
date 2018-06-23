@@ -11,6 +11,10 @@ export class CommandWithOption implements Executable {
     }) name: string;
 
     @Option({
+        name: 'any',
+    }) any:any;
+
+    @Option({
         alias: ['o', 'opt'],
         name: 'override',
     }) option: string;

@@ -15,7 +15,7 @@ export class OrbitalFactory {
      * Constructs dependency tree and puts commands in their place.
      * @param cli the CLI module to bootstrap
      */
-    static bootstrap(cli: Constructor<any>): OrbitalFactory {
+    static bootstrap(cli: Constructor<any>): typeof OrbitalFactory {
         this.metadata = getClassMetadata(cli);
         return this;
     }
@@ -25,7 +25,7 @@ export class OrbitalFactory {
      * @param args pass in your process.argv
      */
     static execute(args: any[] = []): boolean {
-        let hasRun = false;
+
         const commands = this.metadata.commands || [];
         let commandInstances: CommandInstance[] = [];
 
@@ -33,17 +33,20 @@ export class OrbitalFactory {
             const commandMapper = new CommandMapper(commands);
             commandInstances = commandMapper.map();
 
-            if (commandInstances) {
-                const input = ArgumentParser.parseArguments(args);
-                hasRun = this.tryRunCommand(input, commandInstances);
+            // if (commandInstances) {
+            const input = ArgumentParser.parseArguments(args);
+            const hasRun = this.tryRunCommand(input, commandInstances);
+            if (hasRun) {
+                return true;
             }
+            // }
         }
 
-        if (!hasRun) {
-            const help = new HelpGenerator(this.metadata, commandInstances);
-            help.generateGlobalDocs();
-        }
-        return hasRun;
+
+        const help = new HelpGenerator(this.metadata, commandInstances);
+        help.generateGlobalDocs();
+
+        return false;
     }
 
     private static tryRunCommand(input: ParsedArgs, commandInstances: CommandInstance[]) {

@@ -1,6 +1,5 @@
 import { OrbitalFactory } from '@orbital/core';
 import { expect } from 'chai';
-
 import { EmptyCLI } from '../shared/cli/empty-cli';
 import { TestCliWithCommand } from '../shared/cli/test-cli-with-command';
 
@@ -12,6 +11,12 @@ describe('OrbitalFactory', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
             expect(() => testCliWithCommand.execute(['test-cli-with-command', 'test-command']))
                 .to.throw('Leaf command');
+        });
+
+        it('should return true when command successfully executes', () => {
+            const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
+            expect(testCliWithCommand.execute(['test-cli-with-command', 'no-return']))
+                .to.equal(true);
         });
 
         it('should show help if command does not exist', () => {
