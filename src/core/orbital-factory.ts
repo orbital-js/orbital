@@ -7,15 +7,15 @@ import { getClassMetadata } from './reflection/class';
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
 
-export class OrbitalFactoryStatic {
+export class OrbitalFactory {
 
-    private metadata: CLIMetadata = {};
+    private static metadata: CLIMetadata = {};
 
     /**
      * Constructs dependency tree and puts commands in their place.
      * @param cli the CLI module to bootstrap
      */
-    bootstrap(cli: Constructor<any>): this {
+    static bootstrap(cli: Constructor<any>): OrbitalFactory {
         this.metadata = getClassMetadata(cli);
         return this;
     }
@@ -24,7 +24,7 @@ export class OrbitalFactoryStatic {
      * This actually tells Node to run your CLI.
      * @param args pass in your process.argv
      */
-    execute(args: any[] = []): boolean {
+    static execute(args: any[] = []): boolean {
         let hasRun = false;
         const commands = this.metadata.commands || [];
         let commandInstances: CommandInstance[] = [];
@@ -46,7 +46,7 @@ export class OrbitalFactoryStatic {
         return hasRun;
     }
 
-    private tryRunCommand(input: ParsedArgs, commandInstances: CommandInstance[]) {
+    private static tryRunCommand(input: ParsedArgs, commandInstances: CommandInstance[]) {
         let hasRun = true;
         try {
             /**
@@ -67,5 +67,3 @@ export class OrbitalFactoryStatic {
         return hasRun;
     }
 }
-
-export const OrbitalFactory = new OrbitalFactoryStatic();
