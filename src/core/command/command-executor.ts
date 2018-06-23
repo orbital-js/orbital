@@ -37,11 +37,11 @@ export class CommandExecutor {
     private static getOption(option: OptionMetadata, args: ParsedArgs) {
         let result;
         const name = option.name as string;
-        const alias = option.alias;
+        const aliases = option.aliases;
         if (name && args.options[name]) {
             result = args.options[name];
-        } else if (alias && alias.length > 0) {
-            const aliasWasUsedInstead = alias.find((a: string) => args.options[a] !== undefined);
+        } else if (aliases && aliases.length > 0) {
+            const aliasWasUsedInstead = aliases.find((a: string) => args.options[a] !== undefined);
 
             if (aliasWasUsedInstead) {
                 result = args.options[aliasWasUsedInstead];

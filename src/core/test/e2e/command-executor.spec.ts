@@ -1,9 +1,9 @@
 import { OrbitalFactory } from '@orbital/core';
+import { expect } from 'chai';
 import { MultipleAliases } from '../shared/cli/cli-with-multiple-aliases';
 import { MultipleNames } from '../shared/cli/cli-with-multiple-names';
-import { expect } from 'chai';
 
-describe('Commands with Params', () => {
+describe('Command Executor', () => {
     it('should throw if there are multiple commands with same alias', () => {
         const factory = OrbitalFactory.bootstrap(MultipleAliases);
         expect(() => factory.execute(['good-cli', 'alpha']))

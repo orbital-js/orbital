@@ -17,17 +17,12 @@ export interface CommandMetadata {
      *
      * Note: this will throw an error if any of the aliases are duplicate with another command.
      */
-    alias?: string[];
-    /**
-     * @ignore Not yet implemented
-     */
-    subcommands?: any[];
+    aliases?: string[];
     /**
      * A description for the command: what does it do?
      */
     description?: string;
 }
-
 
 /**
  * Decorator function defining a CLI command
@@ -36,7 +31,7 @@ export interface CommandMetadata {
  */
 export function Command(configuration: CommandMetadata): ClassDecorator {
     return (constructor: any) => {
-        setClassMetadata(constructor, configuration);
+        setClassMetadata(constructor, { ...configuration, type: 'command' });
         return constructor;
     };
 }

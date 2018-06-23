@@ -2,7 +2,7 @@ import { Command, Executable, Param } from '@orbital/core';
 
 @Command({
     name: 'with-param',
-    alias: ['wp'],
+    aliases: ['wp'],
 })
 export class CommandWithParam implements Executable {
     execute(

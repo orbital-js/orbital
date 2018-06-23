@@ -7,7 +7,10 @@ export interface CLIMetadata {
     name?: string;
     prettyName?: string;
     version?: string;
-    commands?: any[];
+    /**
+     * import your commands and subcommand groups
+     */
+    declarations?: any[];
 }
 
 /**

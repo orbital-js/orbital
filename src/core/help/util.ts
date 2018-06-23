@@ -12,9 +12,9 @@ import { tern } from '../util/util';
  * @param depth the number of times to indent the string
  */
 export function indent(depth: number = 0, str: string = '') {
-    return str.split('\n')
+    return str.split(n)
         .map(i => '    '.repeat(depth) + i)
-        .join('\n');
+        .join(n);
 }
 
 const n = '\n';
@@ -40,8 +40,9 @@ export function generateCommandUsage(
     if (command.description) {
         str += indent(1, command.description) + n;
     }
-    if ((Array.isArray(command.alias) && command.alias[0]) || (!Array.isArray(command.alias) && command.alias)) {
-        str += indent(1, chalk.blue('Aliases: ') + command.alias.join(', ')) + n;
+    const aliases = command.aliases;
+    if (arrayIsPopulated(aliases)) {
+        str += indent(1, chalk.blue('Aliases: ') + aliases.join(', ')) + n;
     }
     str += n + indent(1, generateParamDocs(command.params, command.paramTypes)) + n;
     str += indent(1, generateOptionDocs(command.options));
@@ -92,13 +93,13 @@ export function generateOptionDocs(options: { [prop: string]: ModifiedOptionMeta
     let str = '';
     for (const option in options) {
         const opt = options[option];
-        str += chalk.blue('--' + tern(opt.name as string, '')) + ' '
+        str += chalk.blue('--' + opt.name) + ' '
             + chalk.green('(' + opt.type.toLowerCase() + ')') + ' - '
             + tern(opt.description, '') + n;
-
-        if (Array.isArray(opt.alias) && arrayIsPopulated(opt.alias)) {
+        const aliases = opt.aliases;
+        if (Array.isArray(aliases) && arrayIsPopulated(aliases)) {
             str += indent(1, chalk.green('Aliases: ') +
-                opt.alias
+                aliases
                     .map(alias => '-' + alias)
                     .join(', '));
         }

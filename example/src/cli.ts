@@ -3,6 +3,6 @@ import { TestCommand } from './commands/test.command';
 
 @CLI({
     name: 'example',
-    commands: [TestCommand]
+    declarations: [TestCommand]
 })
 export class ExampleCLI { }

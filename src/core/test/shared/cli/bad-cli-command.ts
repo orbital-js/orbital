@@ -4,7 +4,7 @@ import { EmptyCommand } from '../commands/empty-command';
 
 @CLI({
     name: 'bad-cli-command',
-    commands: [
+    declarations: [
         TestCommand,
         EmptyCommand,
         'lol',

@@ -5,8 +5,8 @@ import { getType } from '../reflection/types';
  * Configuration for the `Option` decorator
  */
 export interface OptionMetadata {
-    name?: string | symbol;
-    alias?: string[];
+    name?: string;
+    aliases?: string[];
     brief?: string;
     description?: string;
 }
@@ -23,7 +23,7 @@ export function Option(option: OptionMetadata = {}): PropertyDecorator {
         let options = target.constructor.options;
 
         if (!option.name) {
-            option.name = propertyKey;
+            option.name = propertyKey.toString();
         }
 
         const rawType = getType(target, propertyKey);

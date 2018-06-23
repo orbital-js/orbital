@@ -1,9 +1,15 @@
-export function arrayIsPopulated(array: any): boolean {
-    const isArray = Array.isArray(array);
-    const isNotEmpty = array.length > 0;
-    const firstElementIsNotNull: boolean = array[0];
+import { isNullOrUndefined } from 'util';
 
-    return isArray
-        && isNotEmpty
-        && firstElementIsNotNull;
+export function arrayIsPopulated(array: any): boolean {
+    try {
+        const isArray: boolean = Array.isArray(array);
+        const isNotEmpty: boolean = array.length > 0;
+        const firstElementIsNotNull: boolean = !isNullOrUndefined(array[0]);
+
+        return isArray
+            && isNotEmpty
+            && firstElementIsNotNull;
+    } catch {
+        return false;
+    }
 }

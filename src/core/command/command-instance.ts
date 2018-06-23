@@ -8,7 +8,7 @@ export type ModifiedOptionMetadata = OptionMetadata & { propertyKey: string; nam
 export interface CommandInstance {
     instance: Executable & any;
     name: string;
-    alias: string[];
+    aliases: string[];
     params: ModifiedParamMetadata[];
     description: string;
     paramTypes: any[];

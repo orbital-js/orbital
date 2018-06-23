@@ -6,7 +6,7 @@ import { generateCommandUsage, generateOptionDocs, generateParamDocs, indent } f
 const emptyInstance: CommandInstance = {
     instance: '',
     name: 'l',
-    alias: ['p'],
+    aliases: ['p'],
     params: [],
     paramTypes: [],
     options: {},
@@ -15,7 +15,7 @@ const emptyInstance: CommandInstance = {
 
 const option: ModifiedOptionMetadata = {
     name: 'option',
-    alias: ['o'],
+    aliases: ['o'],
     propertyKey: 'option',
     description: 'hello',
     type: 'String',

@@ -4,7 +4,7 @@ import { CLI, Command } from '@orbital/core';
 
 @Command({
     name: 'alpha',
-    alias: ['a', 'b'],
+    aliases: ['a', 'b'],
 })
 export class Alpha {
     execute() { }
@@ -12,7 +12,7 @@ export class Alpha {
 
 @Command({
     name: 'beta',
-    alias: ['a', 'b'],
+    aliases: ['a', 'b'],
 })
 export class Beta {
     execute() { }
@@ -20,7 +20,7 @@ export class Beta {
 
 @CLI({
     name: 'test-cli',
-    commands: [
+    declarations: [
         Alpha,
         Beta,
     ],

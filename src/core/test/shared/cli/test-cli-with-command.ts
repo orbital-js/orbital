@@ -3,7 +3,7 @@ import { TestCommand } from '../commands/command';
 import { NoReturnCommand } from '../commands/command-no-return';
 @CLI({
     name: 'test-cli-with-command',
-    commands: [
+    declarations: [
         TestCommand,
         NoReturnCommand
     ],

@@ -3,6 +3,6 @@ import { CommandWithBadDecorator } from '../commands/command-with-bad-param';
 
 @CLI({
     name: 'test-cli',
-    commands: [CommandWithBadDecorator],
+    declarations: [CommandWithBadDecorator],
 })
 export class CLIWithBadParam { }

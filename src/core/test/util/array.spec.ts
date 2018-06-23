@@ -12,6 +12,6 @@ describe('arrayIsPopulated', () => {
         expect(arrayIsPopulated([null])).to.equal(false);
     });
     it('should return true if populated', () => {
-        expect(arrayIsPopulated([3])).to.equal(false);
+        expect(arrayIsPopulated([3])).to.equal(true);
     });
 });

@@ -1,14 +1,10 @@
 import { Command, Executable } from '@orbital/core';
 import { getClassMetadata } from '@orbital/core/reflection/class';
-
 import { expect } from 'chai';
 
 @Command({
     name: 'test-command',
-    alias: ['test', 't'],
-    subcommands: [
-        'fake',
-    ],
+    aliases: ['test', 't'],
 })
 class TestCommand implements Executable {
     execute(...args: any[]): void {
@@ -24,11 +20,7 @@ describe('Command decorator', () => {
             .and.to.equal('test-command');
 
         expect(metadata)
-            .to.haveOwnProperty('alias')
+            .to.haveOwnProperty('aliases')
             .and.deep.equal(['test', 't']);
-
-        expect(metadata)
-            .to.haveOwnProperty('subcommands')
-            .and.deep.equal(['fake']);
     });
 });

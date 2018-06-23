@@ -2,30 +2,30 @@ import { Command, Executable, Option } from '@orbital/core';
 
 @Command({
     name: 'with-option',
-    alias: ['wo'],
+    aliases: ['wo'],
 })
 export class CommandWithOption implements Executable {
 
     @Option({
-        alias: ['n'],
+        aliases: ['n'],
     }) name: string;
 
     @Option({
         name: 'any',
-        alias: undefined
+        aliases: undefined
     }) any: any;
 
     @Option({
-        alias: ['o', 'opt'],
+        aliases: ['o', 'opt'],
         name: 'override',
     }) option: string;
 
     @Option({
-        alias: ['d'],
+        aliases: ['d'],
     }) default: string = 'def';
 
     @Option({
-        alias: ['enable'],
+        aliases: ['enable'],
     }) enableDef: boolean;
 
     @Option() emptyOption: string;

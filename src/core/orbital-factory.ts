@@ -26,7 +26,7 @@ export class OrbitalFactory {
      */
     static execute(args: any[] = []): boolean {
 
-        const commands = this.metadata.commands || [];
+        const commands = this.metadata.declarations || [];
         let commandInstances: CommandInstance[] = [];
 
         if (arrayIsPopulated(commands)) {
