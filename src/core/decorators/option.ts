@@ -31,8 +31,6 @@ export function Option(option: OptionMetadata = {}): PropertyDecorator {
         const type = rawType.name !== 'Object' ? rawType.name : 'any';
         console.log(type);
 
-
-
         // an object with the propertyKey stored on the
         // object to inject it back into the class later
         const optionSpread = { ...option, propertyKey, type };

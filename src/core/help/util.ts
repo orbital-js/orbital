@@ -3,7 +3,6 @@ import { CommandInstance, ModifiedOptionMetadata, ModifiedParamMetadata } from '
 import { arrayIsPopulated } from '../util/array';
 import { tern } from '../util/util';
 
-
 /**
  * @internal
  *
