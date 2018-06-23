@@ -14,7 +14,8 @@ export class HelpGenerator {
             'For help understanding these docs, go to ' +
             'https://www.orbital.io/docs/understanding-orbital-documentation.\n');
         for (const command of this.commands) {
-            console.log(generateCommandUsage(this.cli.name || '', command));
+            const name = tern(this.cli.name, '');
+            console.log(generateCommandUsage(name, command));
         }
 
         return true;

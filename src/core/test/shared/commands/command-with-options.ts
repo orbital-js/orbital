@@ -12,7 +12,8 @@ export class CommandWithOption implements Executable {
 
     @Option({
         name: 'any',
-    }) any:any;
+        alias: undefined
+    }) any: any;
 
     @Option({
         alias: ['o', 'opt'],

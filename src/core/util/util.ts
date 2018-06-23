@@ -1,3 +1,3 @@
-export function tern(str1: string, str2: string): string {
+export function tern<T>(str1: T, str2: T): T {
     return str1 ? str1 : str2;
 }

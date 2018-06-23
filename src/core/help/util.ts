@@ -1,6 +1,8 @@
 import chalk from 'chalk';
-
 import { CommandInstance, ModifiedOptionMetadata, ModifiedParamMetadata } from '../command/command-instance';
+import { arrayIsPopulated } from '../util/array';
+import { tern } from '../util/util';
+
 
 /**
  * @internal
@@ -90,16 +92,16 @@ export function generateParamDocs(params: ModifiedParamMetadata[] = [], types: a
 export function generateOptionDocs(options: { [prop: string]: ModifiedOptionMetadata }): string {
     let str = '';
     for (const option in options) {
-        if (options.hasOwnProperty(option)) {
-            const opt = options[option];
-            str += chalk.blue('--' + (opt.name as string || '')) + ' '
-                + chalk.green('(' + opt.type.toLowerCase() + ')') + ' - '
-                + (opt.description || '') + n;
-            if (opt.alias) {
-                str += indent(1, chalk.green('Aliases: ') + (opt.alias || [])
+        const opt = options[option];
+        str += chalk.blue('--' + tern(opt.name as string, '')) + ' '
+            + chalk.green('(' + opt.type.toLowerCase() + ')') + ' - '
+            + tern(opt.description, '') + n;
+
+        if (Array.isArray(opt.alias) && arrayIsPopulated(opt.alias)) {
+            str += indent(1, chalk.green('Aliases: ') +
+                opt.alias
                     .map(alias => '-' + alias)
                     .join(', '));
-            }
         }
     }
     return str;

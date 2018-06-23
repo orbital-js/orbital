@@ -25,7 +25,7 @@ describe('OrbitalFactory', () => {
                 .to.equal(false);
         });
 
-        it('should throw show help if no commands nor execute method are provided', () => {
+        it('should show help if no commands nor execute method are provided', () => {
             const emptyCli = OrbitalFactory.bootstrap(EmptyCLI);
             expect(emptyCli.execute())
                 .to.equal(false);

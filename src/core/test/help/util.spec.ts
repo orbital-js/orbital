@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import chalk from 'chalk';
-
 import { CommandInstance, ModifiedOptionMetadata, ModifiedParamMetadata } from '../../command/command-instance';
 import { generateCommandUsage, generateOptionDocs, generateParamDocs, indent } from '../../help/util';
 
@@ -17,6 +16,13 @@ const emptyInstance: CommandInstance = {
 const option: ModifiedOptionMetadata = {
     name: 'option',
     alias: ['o'],
+    propertyKey: 'option',
+    description: 'hello',
+    type: 'String',
+};
+
+const optionNoAlias: ModifiedOptionMetadata = {
+    name: 'option',
     propertyKey: 'option',
     description: 'hello',
     type: 'String',
@@ -54,13 +60,13 @@ describe('Help Utilities', () => {
         it('should generate blue for optional params', () => {
             expect(generateParamDocs([param], [String]).trim())
                 .to.equal(chalk.blue('[param] ') +
-                chalk.green('(string)') + ' - hello');
+                    chalk.green('(string)') + ' - hello');
         });
 
         it('should generate red for required params', () => {
             expect(generateParamDocs([{ required: true, ...param }], [String]).trim())
                 .to.equal(chalk.red('<param> ') +
-                chalk.green('(string)') + ' - hello');
+                    chalk.green('(string)') + ' - hello');
         });
     });
 
@@ -68,7 +74,13 @@ describe('Help Utilities', () => {
         it('should generate pretty option docs', () => {
             expect(generateOptionDocs({ option }).trim())
                 .to.equal(chalk.blue('--option') + ' ' +
-                chalk.green('(string)') + ' - hello\n    ' + chalk.green('Aliases: ') + '-o');
+                    chalk.green('(string)') + ' - hello\n    ' + chalk.green('Aliases: ') + '-o');
+        });
+
+        it('should not add to docs if there is no alias', () => {
+            expect(generateOptionDocs({ optionNoAlias }).trim())
+                .to.equal(chalk.blue('--option') + ' ' +
+                    chalk.green('(string)') + ' - hello');
         });
     });
 });

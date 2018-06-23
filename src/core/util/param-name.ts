@@ -1,3 +1,4 @@
+
 export function parseFunctionParameterNames(fn: (...args: any[]) => any): string[] | undefined {
     const groups = fn
         .toString()
@@ -15,5 +16,5 @@ export function getFunctionParameterName(fn: (...args: any[]) => any, index: num
         paramNames = (fn as any).__paramNames = parseFunctionParameterNames(fn);
     }
 
-    return paramNames && paramNames[index] || `param${index}`;
+    return paramNames && paramNames[index] ? paramNames[index] : `param${index}`;
 }
