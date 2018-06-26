@@ -16,15 +16,20 @@
     "suppressImplicitAnyIndexErrors": true,
     "lib": [
       "es2015"
-    ]
+    ],
+    "paths": {
+      "@orbital/*": [
+        "packages/*/src"
+      ]
+    }
   },
   "include": [
-    "src/**/*.ts"
+    "packages/**/*.ts"
   ],
   "exclude": [
     "./dist",
-    "src/**/*.spec.ts",
-    "src/**/test/*",
+    "packages/**/*.spec.ts",
+    "packages/**/test",
     "./node_modules"
   ]
 }

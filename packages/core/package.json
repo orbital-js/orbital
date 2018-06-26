@@ -1,0 +1,22 @@
+{
+    "name": "@orbital/core",
+    "version": "1.0.0-alpha.0",
+    "private": false,
+    "main": "./dist/index",
+    "typings": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc -p tsconfig-build.json"
+    },
+    "dependencies": {
+        "chalk": "^2.4.1",
+        "minimist": "^1.2.0",
+        "reflect-metadata": "^0.1.12",
+        "winston": "^2.4.3"
+    },
+    "peerDependencies": {
+        "typescript": "2.9.2"
+    },
+    "devDependencies": {
+        "typescript": "^2.9.2"
+    }
+}

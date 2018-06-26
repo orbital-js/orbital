@@ -4,7 +4,7 @@
   "description": "Typescript CLI framework for node",
   "scripts": {
     "start": "tsc",
-    "test": "cross-env TS_NODE_PROJECT=src/core/test nyc mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts"
+    "test": "cross-env TS_NODE_PROJECT=packages/core/src/test nyc mocha -r ts-node/register -r tsconfig-paths/register packages/**/test/**/*.spec.ts"
   },
   "dependencies": {
     "chalk": "^2.4.1",
@@ -21,6 +21,7 @@
     "chai": "^4.1.2",
     "coveralls": "^3.0.1",
     "cross-env": "^5.2.0",
+    "lerna": "^2.8.0",
     "mocha": "^4.1.0",
     "nyc": "^11.9.0",
     "ts-node": "^3.3.0",
@@ -32,7 +33,11 @@
     "cli",
     "typescript"
   ],
-  "author": "MrMan wbhob",
+  "author": {
+    "email": "wilsonhobbs1@gmail.com",
+    "name": "Wilson Hobbs",
+    "url": "https://www.wilsonhobbs.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/orbital-js/orbital"
@@ -42,13 +47,20 @@
     "extension": [
       ".ts"
     ],
+    "include": [
+      "packages"
+    ],
     "exclude": [
-      "src/**/test/",
+      "packages/**/test/",
       "**/*.js"
     ],
     "reporter": [
       "text",
+      "lcov",
       "text-summary"
+    ],
+    "require": [
+      "ts-node/register"
     ]
   }
 }
