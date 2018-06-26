@@ -1,5 +1,5 @@
 import { OrbitalFactory } from '../../src/core';
-import { ExampleCLI } from './cli';
+import { ExampleCLI } from './example.cli';
 
 OrbitalFactory
     .bootstrap(ExampleCLI)

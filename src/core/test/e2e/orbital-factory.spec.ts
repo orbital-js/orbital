@@ -1,5 +1,7 @@
 import { OrbitalFactory } from '@orbital/core';
 import { expect } from 'chai';
+import { ChangeMetadataCLI } from 'shared/cli/metadata-change';
+import { MetadataError } from '../../errors/metadata';
 import { EmptyCLI } from '../shared/cli/empty-cli';
 import { TestCliWithCommand } from '../shared/cli/test-cli-with-command';
 
@@ -11,6 +13,18 @@ describe('OrbitalFactory', () => {
             const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
             expect(() => testCliWithCommand.execute(['test-cli-with-command', 'test-command']))
                 .to.throw('Leaf command');
+        });
+
+        it('should ignore npm/npx/ts-node/node prefixes', () => {
+            const testCliWithCommand = OrbitalFactory.bootstrap(TestCliWithCommand);
+            expect(() => testCliWithCommand.execute(['node', 'test-cli-with-command', 'test-command']))
+                .to.throw('Leaf command');
+        });
+
+        it('should throw when metadata has been changed illegally', () => {
+            expect(() => OrbitalFactory
+                .bootstrap(ChangeMetadataCLI))
+                .to.throw(MetadataError);
         });
 
         it('should return true when command successfully executes', () => {

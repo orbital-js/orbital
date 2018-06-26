@@ -1,5 +1,4 @@
 import * as minimist from 'minimist';
-
 import { ParsedArgs } from './parsed-args';
 
 export class ArgumentParser {
@@ -7,24 +6,35 @@ export class ArgumentParser {
 
     public static parseArguments(args: string[]): ParsedArgs {
         this.args = minimist(args);
+        let num = 1;
+        if (['npm', 'npx', 'node', 'ts-node'].indexOf(this.args._[0]) > -1) {
+            num = 2;
+        }
         return {
-            name: this.parseCommandName(),
+            name: this.parseCommandName(num),
+            original: this.parseOriginalCommand(num),
             options: this.parseOptions(),
-            arguments: this.parseParameters(),
+            arguments: this.parseParameters(num),
         };
     }
 
     private static parseOptions() {
-        const args = {...this.args};
+        const args = { ...this.args };
         delete args._;
         return args;
     }
 
-    private static parseParameters() {
-        return this.args._.slice(2);
+    private static parseParameters(num: number) {
+        return this.args._.slice(num + 1);
     }
 
-    private static parseCommandName() {
-        return this.args._[1];
+    private static parseCommandName(num: number) {
+        return this.args._[num];
+    }
+
+    private static parseOriginalCommand(num: number) {
+        const arr = [...this.args._];
+        arr.splice(0, num);
+        return arr;
     }
 }

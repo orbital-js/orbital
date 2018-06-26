@@ -3,6 +3,8 @@
     "moduleResolution": "node",
     "target": "es6",
     "module": "commonjs",
+    "baseUrl": ".",
+    "sourceRoot": "./src",
     "declaration": true,
     "outDir": "./dist",
     "experimentalDecorators": true,
@@ -10,6 +12,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "lib": [
       "es2015"
     ]

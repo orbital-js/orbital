@@ -9,6 +9,11 @@ export interface ParsedArgs {
     name: string;
 
     /**
+     * The entire command entry
+     */
+    original: string[];
+
+    /**
      * the "params" passed in to the command line
      */
     arguments: string[];

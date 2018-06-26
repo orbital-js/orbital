@@ -2,11 +2,12 @@ import { ParsedArgs } from '../argument/parsed-args';
 import { OptionMetadata } from '../decorators/option';
 import { CommandInstance } from './command-instance';
 import { CommandResolver } from './command-resolver';
+import { MappedCommands } from './mapped-commands';
 
 export class CommandExecutor {
-    public static execute(args: ParsedArgs, commands: CommandInstance[]) {
+    public static execute(args: ParsedArgs, commands: MappedCommands) {
         const resolver = new CommandResolver(commands);
-        const command = resolver.findCommand(args.name);
+        const command = resolver.findCommand(args);
         const params = this.getParameters(command, args);
         this.injectOptions(command, args);
         command.instance.execute(...params);

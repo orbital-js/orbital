@@ -44,9 +44,12 @@ export function generateCommandUsage(
     if (arrayIsPopulated(aliases)) {
         str += indent(1, chalk.blue('Aliases: ') + aliases.join(', ')) + n;
     }
-    str += n + indent(1, generateParamDocs(command.params, command.paramTypes)) + n;
-    str += indent(1, generateOptionDocs(command.options));
-
+    if (command.params) {
+        str += n + indent(1, generateParamDocs(command.params, command.paramTypes)) + n;
+    }
+    if (command.options) {
+        str += indent(1, generateOptionDocs(command.options)) + n;
+    }
     return str;
 }
 

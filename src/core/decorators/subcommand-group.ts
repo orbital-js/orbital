@@ -1,13 +1,12 @@
 import { setClassMetadata } from '../reflection/class';
-import { tern } from '../util/util';
 
 /**
  * Configuration for the `Command` decorator.
  */
-export interface CommandMetadata {
+export interface SubcommandGroupMetadata {
     /**
-     * The standard name for your command. This should be a full word, or a hyphenated phrase
-     * and should succinctly describe the function that will be executed.
+     * The standard name for your subcommand group. This should be a full word, or a hyphenated phrase
+     * and should succinctly describe the group of functions that will be executed.
      *
      * Note: this will throw an error if the name is shared with another command
      */
@@ -20,24 +19,23 @@ export interface CommandMetadata {
      */
     aliases?: string[];
     /**
+     * @ignore Not yet implemented
+     */
+    declarations?: any[];
+    /**
      * A description for the command: what does it do?
      */
     description?: string;
 }
 
 /**
- * Decorator function defining a CLI command
+ * Decorator function defining a CLI command group
  *
  * @param configuration configuration of the command
  */
-export function Command(configuration: CommandMetadata): ClassDecorator {
+export function SubcommandGroup(configuration: SubcommandGroupMetadata): ClassDecorator {
     return (constructor: any) => {
-        setClassMetadata(constructor, {
-            name: configuration.name,
-            aliases: tern(configuration.aliases, []),
-            description: tern(configuration.description, 'No description provided.'),
-            type: 'command'
-        });
+        setClassMetadata(constructor, { ...configuration, type: 'subcommand' });
         return constructor;
     };
 }

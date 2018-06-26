@@ -7,26 +7,26 @@
     "test": "cross-env TS_NODE_PROJECT=src/core/test nyc mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts"
   },
   "dependencies": {
-    "chalk": "^2.3.0",
+    "chalk": "^2.4.1",
     "minimist": "^1.2.0",
-    "reflect-metadata": "^0.1.10",
-    "winston": "^2.4.0"
+    "reflect-metadata": "^0.1.12",
+    "winston": "^2.4.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.6",
+    "@types/chai": "^4.1.4",
     "@types/minimist": "^1.2.0",
-    "@types/mocha": "^2.2.44",
-    "@types/node": "^8.0.53",
-    "@types/winston": "^2.3.7",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^8.10.20",
+    "@types/winston": "^2.3.9",
     "chai": "^4.1.2",
-    "coveralls": "^3.0.0",
-    "cross-env": "^5.1.1",
-    "mocha": "^4.0.1",
-    "nyc": "^11.3.0",
+    "coveralls": "^3.0.1",
+    "cross-env": "^5.2.0",
+    "mocha": "^4.1.0",
+    "nyc": "^11.9.0",
     "ts-node": "^3.3.0",
-    "tsconfig-paths": "^2.4.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.1"
+    "tsconfig-paths": "^2.7.3",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
   },
   "keywords": [
     "cli",

@@ -1,0 +1,17 @@
+{
+    "extends": "../tsconfig.json",
+    "include": [
+        "./**/*.ts"
+    ],
+    "compilerOptions": {
+        "baseUrl": "../",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceRoot": "src",
+        "paths": {
+            "@orbital/*": [
+                "./src/*"
+            ]
+        }
+    }
+}

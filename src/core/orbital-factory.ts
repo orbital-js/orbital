@@ -1,22 +1,31 @@
 import { ArgumentParser } from './argument/argument-parser';
 import { ParsedArgs } from './argument/parsed-args';
-import { CommandExecutor, CommandInstance, CommandMapper, CommandNotFoundError } from './command';
+import { CommandExecutor, CommandMapper, CommandNotFoundError } from './command';
+import { MappedCommands } from './command/mapped-commands';
 import { CLIMetadata } from './decorators/cli';
 import { HelpGenerator } from './help/help';
 import { getClassMetadata } from './reflection/class';
+import { Logger } from './shared';
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
 
 export class OrbitalFactory {
 
     private static metadata: CLIMetadata = {};
+    private static map: MappedCommands;
 
     /**
      * Constructs dependency tree and puts commands in their place.
      * @param cli the CLI module to bootstrap
      */
     static bootstrap(cli: Constructor<any>): typeof OrbitalFactory {
-        this.metadata = getClassMetadata(cli);
+        const metadata = getClassMetadata(cli);
+        const declarations = metadata.declarations;
+        if (arrayIsPopulated(declarations)) {
+            this.map = new CommandMapper(declarations).map();
+        } else {
+            Logger.error('You must have at least one command in your declarations array.');
+        }
         return this;
     }
 
@@ -25,31 +34,19 @@ export class OrbitalFactory {
      * @param args pass in your process.argv
      */
     static execute(args: any[] = []): boolean {
-
-        const commands = this.metadata.declarations || [];
-        let commandInstances: CommandInstance[] = [];
-
-        if (arrayIsPopulated(commands)) {
-            const commandMapper = new CommandMapper(commands);
-            commandInstances = commandMapper.map();
-
-            // if (commandInstances) {
-            const input = ArgumentParser.parseArguments(args);
-            const hasRun = this.tryRunCommand(input, commandInstances);
-            if (hasRun) {
-                return true;
-            }
-            // }
+        const input = ArgumentParser.parseArguments(args);
+        const hasRun = this.tryRunCommand(input, this.map);
+        if (hasRun) {
+            return true;
         }
 
-
-        const help = new HelpGenerator(this.metadata, commandInstances);
+        const help = new HelpGenerator(this.metadata, this.map);
         help.generateGlobalDocs();
 
         return false;
     }
 
-    private static tryRunCommand(input: ParsedArgs, commandInstances: CommandInstance[]) {
+    private static tryRunCommand(input: ParsedArgs, commandInstances: MappedCommands) {
         let hasRun = true;
         try {
             /**

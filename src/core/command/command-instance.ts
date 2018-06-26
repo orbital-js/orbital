@@ -16,3 +16,11 @@ export interface CommandInstance {
         [propName: string]: ModifiedOptionMetadata;
     };
 }
+
+// export interface SubcommandInstance {
+//     name: string;
+//     commands: CommandInstance;
+//     subcommands: {
+//         [propName: string]: SubcommandInstance;
+//     };
+// }
