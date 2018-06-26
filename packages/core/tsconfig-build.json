@@ -2,13 +2,16 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "baseUrl": ".",
-        "outDir": "dist"
+        "outDir": "dist",
+        "sourceRoot": "src",
+        "sourceMap": true,
+        "declaration": true
     },
     "include": [
         "index.ts"
     ],
     "exclude": [
-        "test",
+        "src/test",
         "node_modules"
     ]
 }
