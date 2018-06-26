@@ -3,7 +3,6 @@ import { OrbitalFactory } from '../../orbital-factory';
 import { CLIWithBadParam } from '../shared/cli/cli-with-bad-param';
 import { GoodCLI } from '../shared/cli/good-cli';
 
-
 describe('Commands with Params', () => {
     let cli: typeof OrbitalFactory;
 

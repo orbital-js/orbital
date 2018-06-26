@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { getClassMetadata } from '../../reflection/class';
 import { TestCLI } from '../shared/cli/test-cli';
 
-
 describe('CLI decorator', () => {
     it('Should attatch metadata', () => {
         const metadata = getClassMetadata(TestCLI);

@@ -4,7 +4,6 @@ import { Logger } from '../shared';
 import { format } from '../shared/logger/format';
 import { Level } from '../shared/logger/level';
 
-
 describe('Logging', () => {
     describe('Format', () => {
         it('should format properly', () => {
