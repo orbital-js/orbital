@@ -4,7 +4,8 @@
   "description": "Typescript CLI framework for node",
   "scripts": {
     "start": "tsc",
-    "test": "cross-env TS_NODE_PROJECT=packages/core/src/test nyc mocha -r ts-node/register -r tsconfig-paths/register packages/**/test/**/*.spec.ts"
+    "test": "cross-env TS_NODE_PROJECT=packages/core/src/test nyc mocha -r ts-node/register -r tsconfig-paths/register packages/**/test/**/*.spec.ts",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "dependencies": {
     "chalk": "^2.4.1",
@@ -19,6 +20,7 @@
     "@types/node": "^8.10.20",
     "@types/winston": "^2.3.9",
     "chai": "^4.1.2",
+    "conventional-changelog-cli": "^2.0.1",
     "coveralls": "^3.0.1",
     "cross-env": "^5.2.0",
     "lerna": "^2.8.0",
