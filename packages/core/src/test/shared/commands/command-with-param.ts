@@ -6,7 +6,9 @@ import { Command, Executable, Param } from '../../../';
 })
 export class CommandWithParam implements Executable {
     execute(
-        @Param() name: string,
+        @Param({
+            required: true
+        }) name: string,
         @Param() age?: number,
     ) {
         if (age) {

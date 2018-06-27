@@ -1,5 +1,7 @@
+import { isNullOrUndefined } from 'util';
 import { ParsedArgs } from '../argument/parsed-args';
 import { OptionMetadata } from '../decorators/option';
+import { ParamUndefinedError } from '../errors/param-undefined';
 import { CommandInstance } from './command-instance';
 import { CommandResolver } from './command-resolver';
 import { MappedCommands } from './mapped-commands';
@@ -23,7 +25,11 @@ export class CommandExecutor {
         const parameters = [];
         if (command.params) {
             for (const param of command.params) {
+                const argument = args.arguments[param.index + depth];
                 parameters[param.index] = args.arguments[param.index + depth];
+                if (param.required === true && isNullOrUndefined(argument)) {
+                    throw new ParamUndefinedError(param.name!);
+                }
             }
         }
         return parameters;
