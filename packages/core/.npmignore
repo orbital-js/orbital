@@ -2,3 +2,4 @@ src
 test
 node_modules
 index.ts
+!dist/src
