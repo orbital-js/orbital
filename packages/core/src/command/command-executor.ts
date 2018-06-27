@@ -5,19 +5,25 @@ import { CommandResolver } from './command-resolver';
 import { MappedCommands } from './mapped-commands';
 
 export class CommandExecutor {
+    /**
+     * public method to execute the command with params
+     * @param args parsed arguments from ArgumentParser
+     * @param commands map of commands from CommandMapper
+     */
     public static execute(args: ParsedArgs, commands: MappedCommands) {
         const resolver = new CommandResolver(commands);
-        const command = resolver.findCommand(args);
-        const params = this.getParameters(command, args);
+        const { command, depth } = resolver.findCommand(args);
+        const params = this.getParameters(command, args, depth);
         this.injectOptions(command, args);
         command.instance.execute(...params);
     }
 
-    private static getParameters(command: CommandInstance, args: ParsedArgs) {
+
+    private static getParameters(command: CommandInstance, args: ParsedArgs, depth: number) {
         const parameters = [];
         if (command.params) {
             for (const param of command.params) {
-                parameters[param.index] = args.arguments[param.index];
+                parameters[param.index] = args.arguments[param.index + depth];
             }
         }
         return parameters;

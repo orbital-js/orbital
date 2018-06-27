@@ -31,4 +31,13 @@ describe('Subcommands', () => {
         expect(execution)
             .to.equal(false);
     });
+
+    it('should interpret parameters correctly in subcommands', () => {
+        const execution = () => OrbitalFactory
+            .bootstrap(SubcommandCLI)
+            .execute(['subcommand', 'sub', 'sub', 'bye', 'test']);
+
+        expect(execution)
+            .to.throw('test');
+    });
 });

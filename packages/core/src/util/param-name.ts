@@ -1,20 +1,11 @@
-
-export function parseFunctionParameterNames(fn: (...args: any[]) => any): string[] | undefined {
-    const groups = fn
-        .toString()
-        .match(/^[^{=]*\(([\w\d$-,\s]*)\)/);
-
-    return groups ? groups[1].trim().split(/\s*,\s*/) : undefined;
-}
-
-export function getFunctionParameterName(fn: (...args: any[]) => any, index: number): string {
-    let paramNames: string[] | undefined;
-
-    if ((fn as any).__paramNames) {
-        paramNames = (fn as any).__paramNames;
-    } else {
-        paramNames = (fn as any).__paramNames = parseFunctionParameterNames(fn);
+// tslint:disable-next-line:max-line-length
+const STRIP_COMMENTS = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s*=[^,\)]*(('(?:\\'|[^'\r\n])*')|("(?:\\"|[^"\r\n])*"))|(\s*=[^,\)]*))/mg;
+const ARGUMENT_NAMES = /([^\s,]+)/g;
+export function getParamNames(func: FunctionConstructor) {
+    const fnStr = func.toString().replace(STRIP_COMMENTS, '');
+    let result = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(ARGUMENT_NAMES);
+    if (result === null) {
+        result = [];
     }
-
-    return paramNames && paramNames[index] ? paramNames[index] : `param${index}`;
+    return result;
 }

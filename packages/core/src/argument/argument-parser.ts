@@ -3,38 +3,54 @@ import { ParsedArgs } from './parsed-args';
 
 export class ArgumentParser {
     private static args: minimist.ParsedArgs;
-
+    private static num: number;
+    /**
+     * Maps arguments to object for simplified consumption
+     * @param args array of arguments passed into CLI
+     */
     public static parseArguments(args: string[]): ParsedArgs {
         this.args = minimist(args);
-        let num = 1;
+        this.num = 1;
         if (['npm', 'npx', 'node', 'ts-node'].indexOf(this.args._[0]) > -1) {
-            num = 2;
+            this.num = 2;
         }
         return {
-            name: this.parseCommandName(num),
-            original: this.parseOriginalCommand(num),
+            name: this.parseCommandName(),
+            original: this.parseOriginalCommand(),
             options: this.parseOptions(),
-            arguments: this.parseParameters(num),
+            arguments: this.parseParameters(),
         };
     }
 
+    /**
+     * Returns options object without params
+     */
     private static parseOptions() {
         const args = { ...this.args };
         delete args._;
         return args;
     }
 
-    private static parseParameters(num: number) {
-        return this.args._.slice(num + 1);
+    /**
+     * gets cli arguments without command name
+     */
+    private static parseParameters() {
+        return this.args._.slice(this.num + 1);
     }
 
-    private static parseCommandName(num: number) {
-        return this.args._[num];
+    /**
+     * gets command name string from argument list
+     */
+    private static parseCommandName() {
+        return this.args._[this.num];
     }
 
-    private static parseOriginalCommand(num: number) {
+    /**
+     * gets whole original command with arguments, without command name/prefix
+     */
+    private static parseOriginalCommand() {
         const arr = [...this.args._];
-        arr.splice(0, num);
+        arr.splice(0, this.num);
         return arr;
     }
 }

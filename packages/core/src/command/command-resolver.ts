@@ -15,7 +15,8 @@ export class CommandResolver {
         this.subcommands = map.subcommands;
     }
 
-    public findCommand(args: ParsedArgs): CommandInstance {
+    public findCommand(args: ParsedArgs)
+        : { command: CommandInstance, depth: number } {
         let command: CommandInstance | null = null;
         let commands = this.commands;
         let subcommands = this.subcommands;
@@ -44,7 +45,7 @@ export class CommandResolver {
         if (isNullOrUndefined(command)) {
             throw new CommandNotFoundError(args.name);
         }
-        return command;
+        return { command, depth: i };
     }
 
     private findCommandWithName

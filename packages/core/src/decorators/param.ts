@@ -1,5 +1,6 @@
+import { isNullOrUndefined } from 'util';
 import { Logger } from '../shared';
-import { getFunctionParameterName } from '../util/param-name';
+import { getParamNames } from '../util/param-name';
 
 /**
  * Configuration for the `Param` decorator
@@ -33,7 +34,12 @@ export function Param(param: ParamMetadata = {}): ParameterDecorator {
             params = [];
         }
 
-        const propKey = getFunctionParameterName(target[propertyKey], index);
+        const propKeyArray = getParamNames(target[propertyKey]);
+        const propKey = propKeyArray[index];
+
+        if (isNullOrUndefined(param.name)) {
+            param.name = propKey;
+        }
 
         // assign the parameter in the exact order we need it
         params[index] = { ...param, index, propertyKey: propKey };

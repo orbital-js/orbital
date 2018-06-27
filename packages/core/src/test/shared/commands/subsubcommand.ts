@@ -1,11 +1,13 @@
-import { Command, Executable, SubcommandGroup } from '../../../';
+import { Command, Executable, Param, SubcommandGroup } from '../../../';
 
 @Command({
     name: 'bye'
 })
 export class MyGoodbyeCommand extends Executable {
-    execute() {
-        throw new Error('goodbye');
+    execute(
+        @Param({}) hi = 'goodbye'
+    ) {
+        throw new Error(hi);
     }
 }
 
