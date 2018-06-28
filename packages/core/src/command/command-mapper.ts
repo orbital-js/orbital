@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { isNullOrUndefined } from 'util';
 import { CommandMetadata } from '../decorators/command';
 import { SubcommandGroupMetadata } from '../decorators/subcommand-group';
@@ -7,7 +8,6 @@ import { MetadataError } from '../errors/metadata';
 import { getClassMetadata } from '../reflection/class';
 import { getParamTypes } from '../reflection/types';
 import { arrayIsPopulated } from '../util/array';
-import { tern } from '../util/util';
 import { CommandInstance } from './command-instance';
 import { MappedCommands, MappedSubcommands } from './mapped-commands';
 
@@ -58,7 +58,7 @@ export class CommandMapper {
         const mappedCommands: MappedCommands = { commands: [], subcommands: [] };
 
         const subcommandMetadata: SubcommandGroupMetadata = getClassMetadata(subcommandGroup);
-        const declarations = tern(subcommandMetadata.declarations, []);
+        const declarations = _.defaultTo(subcommandMetadata.declarations, []);
         for (const declaration of declarations) {
             const instantiated = this.instantiate(declaration);
 
@@ -93,8 +93,8 @@ export class CommandMapper {
         return {
             instance: commandInstance,
             name: commandMetadata.name,
-            aliases: tern(commandMetadata.aliases, []),
-            description: tern(commandMetadata.description, ''),
+            aliases: _.defaultTo(commandMetadata.aliases, []),
+            description: _.defaultTo(commandMetadata.description, ''),
             params: commandInstance.constructor.params,
             options: commandInstance.constructor.options,
             paramTypes

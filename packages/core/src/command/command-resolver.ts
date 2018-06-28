@@ -1,7 +1,7 @@
+import * as _ from 'lodash';
 import { isNullOrUndefined } from 'util';
 import { ParsedArgs } from '../argument/parsed-args';
 import { CommandNotFoundError } from '../errors/command-not-found';
-import { tern } from '../util/util';
 import { CommandInstance } from './command-instance';
 import { MappedCommands, MappedSubcommands } from './mapped-commands';
 
@@ -55,6 +55,6 @@ export class CommandResolver {
 
     private findCommandWithAlias
         <T extends CommandInstance | MappedSubcommands>(alias: string, array: T[]): T | undefined {
-        return array.find(command => (tern(command.aliases, [] as string[])).indexOf(alias) > -1);
+        return array.find(command => (_.defaultTo(command.aliases, [] as string[])).indexOf(alias) > -1);
     }
 }

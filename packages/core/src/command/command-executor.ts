@@ -20,7 +20,6 @@ export class CommandExecutor {
         command.instance.execute(...params);
     }
 
-
     private static getParameters(command: CommandInstance, args: ParsedArgs, depth: number) {
         const parameters = [];
         if (command.params) {

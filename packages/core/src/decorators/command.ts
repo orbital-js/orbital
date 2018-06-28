@@ -1,5 +1,5 @@
+import * as _ from 'lodash';
 import { setClassMetadata } from '../reflection/class';
-import { tern } from '../util/util';
 
 /**
  * Configuration for the `Command` decorator.
@@ -34,8 +34,8 @@ export function Command(configuration: CommandMetadata): ClassDecorator {
     return (constructor: any) => {
         setClassMetadata(constructor, {
             name: configuration.name,
-            aliases: tern(configuration.aliases, []),
-            description: tern(configuration.description, 'No description provided.'),
+            aliases: _.defaultTo(configuration.aliases, []),
+            description: _.defaultTo(configuration.description, 'No description provided.'),
             type: 'command'
         });
         return constructor;
