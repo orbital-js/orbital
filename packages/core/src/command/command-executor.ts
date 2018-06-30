@@ -2,6 +2,7 @@ import { isNullOrUndefined } from 'util';
 import { ParsedArgs } from '../argument/parsed-args';
 import { OptionMetadata } from '../decorators/option';
 import { ParamUndefinedError } from '../errors/param-undefined';
+import { UnknownOptionError } from '../errors/unknown-option-error';
 import { CommandInstance } from './command-instance';
 import { CommandResolver } from './command-resolver';
 import { MappedCommands } from './mapped-commands';
@@ -12,6 +13,9 @@ export class CommandExecutor {
      * @param args parsed arguments from ArgumentParser
      * @param commands map of commands from CommandMapper
      */
+
+    static usedOptions: string[] = [];
+
     public static execute(args: ParsedArgs, commands: MappedCommands) {
         const resolver = new CommandResolver(commands);
         const { command, depth } = resolver.findCommand(args);
@@ -36,13 +40,17 @@ export class CommandExecutor {
 
     private static injectOptions(command: CommandInstance, args: ParsedArgs): void {
         for (const opt in command.options) {
-
             const option = command.options[opt];
             const value = this.getOption(option, args);
             if (value) {
                 command.instance[option.propertyKey] = value;
             }
 
+        }
+        for (const opt of Object.keys(args.options)) {
+            if (this.usedOptions.indexOf(opt) < 0) {
+                throw new UnknownOptionError(opt);
+            }
         }
     }
 
@@ -52,11 +60,13 @@ export class CommandExecutor {
         const aliases = option.aliases;
         if (name && args.options[name]) {
             result = args.options[name];
+            this.usedOptions.push(name);
         } else if (aliases && aliases.length > 0) {
             const aliasWasUsedInstead = aliases.find((a: string) => args.options[a] !== undefined);
 
             if (aliasWasUsedInstead) {
                 result = args.options[aliasWasUsedInstead];
+                this.usedOptions.push(aliasWasUsedInstead);
             }
         }
 
