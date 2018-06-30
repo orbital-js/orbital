@@ -7,7 +7,6 @@ import { getParamNames } from '../util/param-name';
  */
 export interface ParamMetadata {
     name?: string;
-    brief?: string;
     required?: boolean;
     description?: string;
 }

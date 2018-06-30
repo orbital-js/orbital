@@ -1,6 +1,6 @@
 {
   "name": "orbital",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.28",
   "description": "Typescript CLI framework for node",
   "scripts": {
     "start": "tsc",

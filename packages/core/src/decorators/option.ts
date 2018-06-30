@@ -7,7 +7,6 @@ import { getType } from '../reflection/types';
 export interface OptionMetadata {
     name?: string;
     aliases?: string[];
-    brief?: string;
     description?: string;
 }
 

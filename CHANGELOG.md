@@ -1,8 +1,3 @@
-<a name="1.0.0"></a>
-# [1.0.0](https://github.com/orbital-js/orbital/compare/v1.0.0-alpha.28...v1.0.0) (2018-06-27)
-
-
-
 <a name="1.0.0-alpha.28"></a>
 # [1.0.0-alpha.28](https://github.com/orbital-js/orbital/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2018-06-27)
 
