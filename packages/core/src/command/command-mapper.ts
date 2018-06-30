@@ -5,6 +5,7 @@ import { SubcommandGroupMetadata } from '../decorators/subcommand-group';
 import { DuplicateAliasError } from '../errors/duplicate-alias';
 import { DuplicateNameError } from '../errors/duplicate-name';
 import { MetadataError } from '../errors/metadata';
+import { ParamOrderError } from '../errors/param-order-error';
 import { getClassMetadata } from '../reflection/class';
 import { getParamTypes } from '../reflection/types';
 import { arrayIsPopulated } from '../util/array';
@@ -90,12 +91,23 @@ export class CommandMapper {
             this.checkIfAliasesAreAvailable(commandMetadata.aliases as string[], commandMetadata.name);
         }
 
+        const params = commandInstance.constructor.params;
+        let required = true;
+        for (const param of params) {
+            if (param.required === false || param.required === undefined) {
+                required = false;
+            }
+            if (param.required === true && required === false) {
+                throw new ParamOrderError(commandMetadata.name);
+            }
+        }
+
         return {
             instance: commandInstance,
             name: commandMetadata.name,
             aliases: _.defaultTo(commandMetadata.aliases, []),
             description: _.defaultTo(commandMetadata.description, ''),
-            params: commandInstance.constructor.params,
+            params,
             options: commandInstance.constructor.options,
             paramTypes
         };
