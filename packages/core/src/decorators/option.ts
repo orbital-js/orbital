@@ -27,7 +27,7 @@ export function Option(option: OptionMetadata = {}): PropertyDecorator {
 
         const rawType = getType(target, propertyKey);
 
-        const type = rawType.name !== 'Object' ? rawType.name : 'any';
+        const type = rawType.name.toLowerCase() !== 'object' ? rawType.name : 'any';
 
         // an object with the propertyKey stored on the
         // object to inject it back into the class later

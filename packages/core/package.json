@@ -5,7 +5,8 @@
     "main": "./dist/index",
     "typings": "./dist/index.d.ts",
     "scripts": {
-        "build": "tsc -p tsconfig-build.json"
+        "build": "tsc -p tsconfig-build.json",
+        "watch": "tsc -p tsconfig-build.json --watch"
     },
     "dependencies": {
         "chalk": "^2.4.1",

@@ -84,13 +84,19 @@ export function generateParamDocs(params: ModifiedParamMetadata[] = [], types: a
     let str = '';
     for (let i = 0; i < params.length; i++) {
         str += generateParamsColor([params[i]])
-            + chalk.green('(' + types[i].name.toLowerCase() + ')');
+            + chalk.green('(' + paramType(types, i) + ')');
         if (params[i].description) {
             str += ' - ' + params[i].description;
         }
         str += n;
     }
     return str;
+}
+
+export function paramType(types: Array<{ name: string }>, index: number) {
+    const name = types[index].name.toLowerCase();
+
+    return name !== 'object' ? name : 'any';
 }
 
 /**
