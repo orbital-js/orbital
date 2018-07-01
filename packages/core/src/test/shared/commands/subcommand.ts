@@ -1,4 +1,5 @@
 import { Command, Executable, SubcommandGroup } from '../../../';
+import { Param } from '../../../decorators/param';
 import { MySubSubcommand } from './subsubcommand';
 
 @Command({
@@ -6,7 +7,9 @@ import { MySubSubcommand } from './subsubcommand';
     description: 'hello yay'
 })
 export class MyHelloCommand extends Executable {
-    execute() {
+    execute(
+        @Param() subcommand: number
+    ) {
         throw new Error('hello');
     }
 }

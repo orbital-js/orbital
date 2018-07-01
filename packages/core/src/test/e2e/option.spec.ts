@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { OrbitalFactory } from '../../';
+import { UnknownOptionError } from '../../errors/unknown-option-error';
 import { GoodCLI } from '../shared/cli/good-cli';
 
 describe('Commands with Options', () => {
@@ -20,6 +21,11 @@ describe('Commands with Options', () => {
         const name = 'foo';
         expect(runWith(['good-cli', 'with-option', '--opt', name]))
             .to.throw(name);
+    });
+
+    it('should throw if an option is unknown', () => {
+        expect(runWith(['good-cli', 'with-option', '-q']))
+            .to.throw(UnknownOptionError);
     });
 
     it('should override name property from propertyKey', () => {

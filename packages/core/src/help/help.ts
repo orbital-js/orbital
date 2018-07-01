@@ -27,7 +27,7 @@ export class HelpGenerator {
         return true;
     }
 
-    generateForSubcommands(subcommands: MappedSubcommands, prevName = '') {
+    generateForSubcommands(subcommands: MappedSubcommands, prevName: string) {
         for (const command of subcommands.mappedCommands.commands) {
             const name = _.defaultTo(prevName, '' as string);
             console.log(generateCommandUsage(name, command));

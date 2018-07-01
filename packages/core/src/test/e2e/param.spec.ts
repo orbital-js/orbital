@@ -1,4 +1,6 @@
 import { expect } from 'chai';
+import { CLIWithDisorderedParam } from 'shared/cli/cli-with-mismatched-params';
+import { ParamOrderError } from '../../errors/param-order-error';
 import { ParamUndefinedError } from '../../errors/param-undefined';
 import { OrbitalFactory } from '../../orbital-factory';
 import { CLIWithBadParam } from '../shared/cli/cli-with-bad-param';
@@ -31,5 +33,10 @@ describe('Commands with Params', () => {
         const cliWithBadParam = OrbitalFactory.bootstrap(CLIWithBadParam);
         expect(() => cliWithBadParam.execute(['test-cli', 'param']))
             .to.throw('a function');
+    });
+
+    it('should throw ParamOrderError if a required param comes after an optional param', () => {
+        expect(() => OrbitalFactory.bootstrap(CLIWithDisorderedParam))
+            .to.throw(ParamOrderError);
     });
 });

@@ -1,6 +1,4 @@
 import 'reflect-metadata';
-import { isNullOrUndefined } from 'util';
-import { AliasLengthError } from '../errors/alias-length-error';
 import { getType } from '../reflection/types';
 
 /**
@@ -27,9 +25,10 @@ export function Option(option: OptionMetadata = {}): PropertyDecorator {
             option.name = propertyKey.toString();
         }
 
-        if (option.aliases && !isNullOrUndefined(option.aliases)) {
-            option.aliases.forEach(checkAlias(option));
-        }
+        // if (option.aliases && !isNullOrUndefined(option.aliases)) {
+        //     option.aliases.forEach(checkAlias(option));
+        // }
+
         const rawType = getType(target, propertyKey);
 
         const type = rawType.name.toLowerCase() !== 'object' ? rawType.name : 'any';
@@ -48,11 +47,10 @@ export function Option(option: OptionMetadata = {}): PropertyDecorator {
     };
 }
 
-function checkAlias(option: OptionMetadata): (value: string, index: number, array: string[]) => void {
-    return element => {
-        if (element.length !== 1) {
-            throw new AliasLengthError(element.length, 1, option.name!, false);
-        }
-    };
-}
-
+// function checkAlias(option: OptionMetadata): (value: string, index: number, array: string[]) => void {
+//     return element => {
+//         if (element.length !== 1) {
+//             throw new AliasLengthError(element.length, 1, option.name!, false);
+//         }
+//     };
+// }

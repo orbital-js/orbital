@@ -38,14 +38,14 @@ export function generateCommandUsage(
         if asset is required, and name is optional.
     */
     str += chalk.yellow(name + s + command.name) + s + generateParamsColor(command.params) + n;
-    if (command.description) {
-        str += indent(1, command.description) + n;
-    }
+
+    str += indent(1, command.description) + n;
+
     const aliases = command.aliases;
     if (arrayIsPopulated(aliases)) {
         str += indent(1, chalk.blue('Aliases: ') + aliases.join(', ')) + n;
     }
-    if (command.params) {
+    if (arrayIsPopulated(command.params)) {
         str += n + indent(1, generateParamDocs(command.params, command.paramTypes)) + n;
     }
     if (command.options) {
@@ -80,7 +80,7 @@ export function generateParamsColor(params: ModifiedParamMetadata[] = []): strin
  * @param params the parameters from the map
  * @param types the param types from the map
  */
-export function generateParamDocs(params: ModifiedParamMetadata[] = [], types: any[]): string {
+export function generateParamDocs(params: ModifiedParamMetadata[], types: any[]): string {
     let str = '';
     for (let i = 0; i < params.length; i++) {
         str += generateParamsColor([params[i]])
@@ -117,7 +117,7 @@ export function generateOptionDocs(options: { [prop: string]: ModifiedOptionMeta
         if (Array.isArray(aliases) && arrayIsPopulated(aliases)) {
             str += indent(1, chalk.green('Aliases: ') +
                 aliases
-                    .map(alias => '-' + alias)
+                    .map(alias => (alias.length === 1 ? '-' : '--') + alias)
                     .join(', '));
             str += n;
         }

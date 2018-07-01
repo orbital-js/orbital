@@ -1,12 +1,15 @@
-// import { expect } from 'chai';
-// import { getFunctionParameterName } from '../../../../util/param-name';
+import { expect } from 'chai';
+import { getParamNames } from '../../util/param-name';
 
-// describe('paramName', () => {
-//     describe('getFunctionParameterName', () => {
-//         const func = function (cake) { };
-//         console.log((func as any).__paramNames);
+describe('paramName', () => {
+    describe('getFunctionParameterName', () => {
+        const func = (cake) => { return; };
+        const empty = () => { return; };
 
-//         expect(getFunctionParameterName(func, 1))
-//             .to.equal(['cake']);
-//     });
-// });
+        expect(getParamNames(func))
+            .to.deep.equal(['cake']);
+
+        expect(getParamNames(empty))
+            .to.deep.equal([]);
+    });
+});

@@ -18,6 +18,7 @@ export class CommandWithOption implements Executable {
     @Option({
         aliases: ['o', 'opt'],
         name: 'override',
+        description: 'ovverride everything'
     }) option: string;
 
     @Option({

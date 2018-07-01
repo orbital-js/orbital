@@ -93,7 +93,8 @@ export class CommandMapper {
 
         const params = commandInstance.constructor.params;
         let required = true;
-        for (const param of params) {
+
+        for (const param of _.defaultTo(params, [])) {
             if (param.required === false || param.required === undefined) {
                 required = false;
             }
