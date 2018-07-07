@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { OrbitalFactory } from '../../';
-import { UnknownOptionError } from '../../errors/unknown-option-error';
+import { UnknownOptionError } from '../../errors/unknown-option.error';
 import { GoodCLI } from '../shared/cli/good-cli';
 
 describe('Commands with Options', () => {

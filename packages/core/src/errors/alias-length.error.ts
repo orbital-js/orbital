@@ -1,6 +1,6 @@
-import { Logger } from '../shared';
+import { OrbitalError } from './orbital-error';
 
-export class AliasLengthError extends Error {
+export class AliasLengthError extends OrbitalError {
     constructor(length: number, expected: number, optionOrCommand: string, command: boolean) {
         let message: string = 'The alias you input for '
             + (command ? 'command ' : 'option ')
@@ -11,7 +11,6 @@ export class AliasLengthError extends Error {
             message += 'short. ';
         }
         message += 'Please update your alias.';
-        Logger.error(message);
         super(message);
     }
 }

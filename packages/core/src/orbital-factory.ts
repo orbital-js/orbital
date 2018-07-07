@@ -1,8 +1,10 @@
 import { ArgumentParser } from './argument/argument-parser';
 import { ParsedArgs } from './argument/parsed-args';
-import { CommandExecutor, CommandMapper, CommandNotFoundError } from './command';
+import { isDevMode } from './build-configuration';
+import { CommandExecutor, CommandMapper } from './command';
 import { MappedCommands } from './command/mapped-commands';
 import { CLIMetadata } from './decorators/cli';
+import { CommandNotFoundError } from './errors/command-not-found.error';
 import { EmptyDeclarationsError } from './errors/empty-declarations.error';
 import { HelpGenerator } from './help/help';
 import { getClassMetadata } from './reflection/class';
@@ -36,9 +38,11 @@ export class OrbitalFactory {
      */
     static execute(args: any[] = []): boolean {
         const input = ArgumentParser.parseArguments(args);
-        const hasRun = this.tryRunCommand(input, this.map);
-        if (hasRun) {
-            return true;
+        if (input.name !== undefined) {
+            const hasRun = this.tryRunCommand(input, this.map);
+            if (hasRun) {
+                return true;
+            }
         }
 
         const help = new HelpGenerator(this.metadata, this.map);
@@ -62,7 +66,9 @@ export class OrbitalFactory {
             if (error instanceof CommandNotFoundError) {
                 hasRun = false;
             } else {
-                throw error;
+                if (isDevMode()) {
+                    throw error;
+                }
             }
         }
         return hasRun;

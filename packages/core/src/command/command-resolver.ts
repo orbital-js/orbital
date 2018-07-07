@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { isNullOrUndefined } from 'util';
 import { ParsedArgs } from '../argument/parsed-args';
-import { CommandNotFoundError } from '../errors/command-not-found';
+import { CommandNotFoundError } from '../errors/command-not-found.error';
 import { CommandInstance } from './command-instance';
 import { MappedCommands, MappedSubcommands } from './mapped-commands';
 

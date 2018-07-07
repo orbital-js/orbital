@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { CLIWithDisorderedParam } from 'shared/cli/cli-with-mismatched-params';
-import { ParamOrderError } from '../../errors/param-order-error';
-import { ParamUndefinedError } from '../../errors/param-undefined';
+import { ParamOrderError } from '../../errors/param-order.error';
+import { ParamUndefinedError } from '../../errors/param-undefined.error';
 import { OrbitalFactory } from '../../orbital-factory';
 import { CLIWithBadParam } from '../shared/cli/cli-with-bad-param';
 import { GoodCLI } from '../shared/cli/good-cli';

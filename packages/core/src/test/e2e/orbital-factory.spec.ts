@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { MetadataError } from '../../errors/metadata';
+import { EmptyDeclarationsError } from '../../errors/empty-declarations.error';
+import { MetadataError } from '../../errors/metadata.error';
 import { OrbitalFactory } from '../../orbital-factory';
 import { EmptyCLI } from '../shared/cli/empty-cli';
 import { ChangeMetadataCLI } from '../shared/cli/metadata-change';
@@ -40,9 +41,9 @@ describe('OrbitalFactory', () => {
         });
 
         it('should show help if no commands nor execute method are provided', () => {
-            const emptyCli = OrbitalFactory.bootstrap(EmptyCLI);
-            expect(emptyCli.execute())
-                .to.equal(false);
+            const emptyCli = () => OrbitalFactory.bootstrap(EmptyCLI);
+            expect(emptyCli)
+                .to.throw(EmptyDeclarationsError);
         });
     });
 });

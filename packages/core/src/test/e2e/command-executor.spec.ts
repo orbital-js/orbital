@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { DuplicateAliasError } from '../../errors/duplicate-alias';
-import { DuplicateNameError } from '../../errors/duplicate-name';
+import { DuplicateAliasError } from '../../errors/duplicate-alias.error';
+import { DuplicateNameError } from '../../errors/duplicate-name.error';
 import { OrbitalFactory } from '../../orbital-factory';
 import { MultipleAliases } from '../shared/cli/cli-with-multiple-aliases';
 import { MultipleNames } from '../shared/cli/cli-with-multiple-names';

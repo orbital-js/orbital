@@ -1,9 +1,8 @@
-import { Logger } from '../shared';
+import { OrbitalError } from './orbital-error';
 
-export class MetadataError extends Error {
+export class MetadataError extends OrbitalError {
     constructor(commandName: string) {
         const message = `There has been an error parsing metadata on command: '${commandName}.`;
-        Logger.error(message);
         super(message);
     }
 }

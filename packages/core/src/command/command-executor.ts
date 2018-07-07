@@ -1,8 +1,8 @@
 import { isNullOrUndefined } from 'util';
 import { ParsedArgs } from '../argument/parsed-args';
 import { OptionMetadata } from '../decorators/option';
-import { ParamUndefinedError } from '../errors/param-undefined';
-import { UnknownOptionError } from '../errors/unknown-option-error';
+import { ParamUndefinedError } from '../errors/param-undefined.error';
+import { UnknownOptionError } from '../errors/unknown-option.error';
 import { CommandInstance } from './command-instance';
 import { CommandResolver } from './command-resolver';
 import { MappedCommands } from './mapped-commands';
