@@ -3,9 +3,9 @@ import { ParsedArgs } from './argument/parsed-args';
 import { CommandExecutor, CommandMapper, CommandNotFoundError } from './command';
 import { MappedCommands } from './command/mapped-commands';
 import { CLIMetadata } from './decorators/cli';
+import { EmptyDeclarationsError } from './errors/empty-declarations.error';
 import { HelpGenerator } from './help/help';
 import { getClassMetadata } from './reflection/class';
-import { Logger } from './shared';
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
 
@@ -21,10 +21,11 @@ export class OrbitalFactory {
     static bootstrap(cli: Constructor<any>): typeof OrbitalFactory {
         const metadata = getClassMetadata(cli);
         const declarations = metadata.declarations;
+        this.metadata = metadata;
         if (arrayIsPopulated(declarations)) {
             this.map = new CommandMapper(declarations).map();
         } else {
-            Logger.error('You must have at least one command in your declarations array.');
+            throw new EmptyDeclarationsError();
         }
         return this;
     }
