@@ -9,8 +9,6 @@ export class HelpGenerator {
         private map: MappedCommands) { }
 
     generateGlobalDocs(): boolean {
-        console.log(this.cli);
-
         console.log('This is the auto-generated help for ' +
             _.defaultTo(this.cli.prettyName, _.defaultTo(this.cli.name, '')) + '.\n' +
             'For help understanding these docs, go to ' +
