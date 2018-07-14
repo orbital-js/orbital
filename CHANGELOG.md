@@ -1,3 +1,18 @@
+<a name="1.0.0-alpha.30"></a>
+# [1.0.0-alpha.30](https://github.com/orbital-js/orbital/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2018-07-14)
+
+
+### Bug Fixes
+
+* **core:** set prettyName as logger prefix if it is available ([f8e7630](https://github.com/orbital-js/orbital/commit/f8e7630))
+
+
+### Features
+
+* **core:** add initial support for custom configuration ([3e2edb8](https://github.com/orbital-js/orbital/commit/3e2edb8))
+
+
+
 <a name="1.0.0-alpha.29"></a>
 # [1.0.0-alpha.29](https://github.com/orbital-js/orbital/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2018-07-07)
 
