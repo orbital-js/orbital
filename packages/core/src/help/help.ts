@@ -6,13 +6,12 @@ import { generateCommandUsage } from './util';
 export class HelpGenerator {
     constructor(
         private cli: CLIMetadata,
-        private map: MappedCommands) { }
+        private map: MappedCommands
+    ) { }
 
     generateGlobalDocs(): boolean {
-        console.log('This is the auto-generated help for ' +
-            _.defaultTo(this.cli.prettyName, _.defaultTo(this.cli.name, '')) + '.\n' +
-            'For help understanding these docs, go to ' +
-            'https://www.orbital.io/docs/understanding-orbital-documentation.\n');
+        console.log(this.cli.config!.helpMessage + '\n');
+
         const name = _.defaultTo(this.cli.name, '');
         for (const command of this.map.commands) {
             console.log(generateCommandUsage(name, command));

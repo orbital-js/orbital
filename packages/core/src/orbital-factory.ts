@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import { isNullOrUndefined } from 'util';
 import { ArgumentParser } from './argument/argument-parser';
 import { ParsedArgs } from './argument/parsed-args';
 import { isDevMode } from './build-configuration';
@@ -27,9 +26,7 @@ export class OrbitalFactory {
         const metadata: CLIMetadata = getClassMetadata(cli);
 
         // If a pretty name is supplied, set it as the logger prefix
-        if (!isNullOrUndefined(metadata.prettyName)) {
-            Logger.setPrefix(metadata.prettyName);
-        }
+        Logger.setPrefix(metadata.config!.loggerPrefix!);
 
         const declarations = metadata.declarations;
         this.metadata = metadata;

@@ -1,4 +1,5 @@
 import { CLI } from '../../../';
+import { NAME } from '../../../configuration/tokens';
 import { CommandWithOption } from '../commands/command-with-options';
 import { CommandWithParam } from '../commands/command-with-param';
 
@@ -8,6 +9,10 @@ import { CommandWithParam } from '../commands/command-with-param';
         CommandWithOption,
         CommandWithParam,
     ],
-    prettyName: 'Good CLI'
+    prettyName: 'Good CLI',
+    config: {
+        loggerPrefix: 'test' + NAME,
+        helpMessage: 2 as any
+    }
 })
-export class GoodCLI { }
+export class CLIWithConfig { }

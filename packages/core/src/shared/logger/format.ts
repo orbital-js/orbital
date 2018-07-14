@@ -16,6 +16,6 @@ export function format(message: string, level: Level, prefix: string): string {
             levelLabel = chalk.red('[' + level + ']');
             break;
     }
-
-    return chalk.blue('[' + prefix + ']') + ' ' + levelLabel + ' ' + message;
+    const displayPrefix = prefix ? chalk.blue('[' + prefix + ']') + ' ' : '';
+    return displayPrefix + levelLabel + ' ' + message;
 }
