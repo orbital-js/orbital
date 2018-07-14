@@ -1,5 +1,4 @@
-import { transports, Logger as winstonLogger } from 'winston';
-
+import { Logger as winstonLogger, transports } from 'winston';
 import { format } from './format';
 
 /**
@@ -20,6 +19,10 @@ export class Logger {
     });
 
     private constructor() { }
+
+    static setPrefix(prefix: string) {
+        this.prefix = prefix;
+    }
 
     public static info(message: any): void {
         this.logger.info(message);

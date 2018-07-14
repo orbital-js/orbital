@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+import { isNullOrUndefined } from 'util';
 import { ArgumentParser } from './argument/argument-parser';
 import { ParsedArgs } from './argument/parsed-args';
 import { isDevMode } from './build-configuration';
@@ -8,6 +10,7 @@ import { CommandNotFoundError } from './errors/command-not-found.error';
 import { EmptyDeclarationsError } from './errors/empty-declarations.error';
 import { HelpGenerator } from './help/help';
 import { getClassMetadata } from './reflection/class';
+import { Logger } from './shared';
 import { arrayIsPopulated } from './util/array';
 import { Constructor } from './util/constructor';
 
@@ -21,11 +24,17 @@ export class OrbitalFactory {
      * @param cli the CLI module to bootstrap
      */
     static bootstrap(cli: Constructor<any>): typeof OrbitalFactory {
-        const metadata = getClassMetadata(cli);
+        const metadata: CLIMetadata = getClassMetadata(cli);
+
+        // If a pretty name is supplied, set it as the logger prefix
+        if (!isNullOrUndefined(metadata.prettyName)) {
+            Logger.setPrefix(metadata.prettyName);
+        }
+
         const declarations = metadata.declarations;
         this.metadata = metadata;
         if (arrayIsPopulated(declarations)) {
-            this.map = new CommandMapper(declarations).map();
+            this.map = new CommandMapper(_.defaultTo(declarations, [])).map();
         } else {
             throw new EmptyDeclarationsError();
         }
